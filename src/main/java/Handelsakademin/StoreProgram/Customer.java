@@ -6,8 +6,8 @@ public class Customer extends User {
     private String city;
     private static int nextId = 0;
 
-    public Customer(String firstName, String lastName, String email, boolean working, String streetName, int zipCode, String city, String password) {
-        super(nextId, firstName, lastName, email, working, password);
+    public Customer(String firstName, String lastName, String email, String streetName, int zipCode, String city, String password) {
+        super(nextId, firstName, lastName, email, false, password);
         nextId++;
         this.streetName = streetName;
         this.zipCode = zipCode;
