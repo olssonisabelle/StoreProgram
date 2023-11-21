@@ -14,6 +14,8 @@ public class LoginForm {
     private JLabel messageLabel;
     private JFrame jFrame;
 
+    // UserList to include all available user
+    // For now there is a method at the bottom that has a few users when testing the application
     private ArrayList<User> userList = createUsers();
 
     public LoginForm() {
@@ -26,6 +28,8 @@ public class LoginForm {
 
 
         loginButton.addActionListener(new ActionListener() {
+
+            // When the loginButton is pressed the userList is checked
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean foundUser = false;
@@ -40,6 +44,7 @@ public class LoginForm {
                     }
                 }
 
+                // If-statement to check if the user is customer, employee or doesn't exist as all
                 if(foundUser && tempUser.isWorking()){
                     EmployeeForm employeeForm = new EmployeeForm();
                     jFrame.setVisible(false);
@@ -56,6 +61,17 @@ public class LoginForm {
         });
     }
 
+    // Use this when wanting access to the loginForm in other forms
+    public LoginForm getLoginForm(){
+        return this;
+    }
+
+    //Can make the Login form visible or hide it
+    public void setVisibility(boolean isVisible){
+        jFrame.setVisible(isVisible);
+    }
+
+    // Adds some users to userList
     private ArrayList<User> createUsers(){
         ArrayList<User> users = new ArrayList<>();
         users.add(new Employee("Ulf", "Bo", "ulf.bo@mail.com", 400, "123"));
