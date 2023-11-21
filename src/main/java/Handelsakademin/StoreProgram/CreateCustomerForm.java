@@ -17,7 +17,7 @@ public class CreateCustomerForm {
     private JTextField passwordField;
     private JButton createCustomerButton;
 
-    public CreateCustomerForm() {
+    public CreateCustomerForm(UserHandler userHandler) {
         jFrame = new JFrame();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
@@ -27,7 +27,30 @@ public class CreateCustomerForm {
         createCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Fetch all parameters from the JFrames
+                String firstName = firstNameField.getText();
+                if(firstName.isEmpty()) {
+                    //TODO ?? add new checkers if the fields are empty and show it to the user, the same goes for all other fields
+                }
+                String lastName = lastNameField.getText();
+                String email = emailField.getText();
+                String street = streetField.getText();
+                int zipCode = 0;
+                try {
+                    zipCode = Integer.parseInt(zipCodeField.getText());
+                } catch (Exception ex) {
 
+                }
+                String city = cityField.getText();
+                String password = passwordField.getText();
+                Customer newCustomer = new Customer(firstName,
+                        lastName,
+                        email,
+                        street,
+                        zipCode,
+                        city,
+                        password);
+                userHandler.addNewCustomer(newCustomer);
             }
         });
     }

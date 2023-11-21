@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class LoginForm {
     private JPanel loginPanel;
@@ -14,11 +15,7 @@ public class LoginForm {
     private JLabel messageLabel;
     private JFrame jFrame;
 
-    // UserList to include all available user
-    // For now there is a method at the bottom that has a few users when testing the application
-    private ArrayList<User> userList = createUsers();
-
-    public LoginForm() {
+    public LoginForm(UserHandler userHandler) {
         jFrame = new JFrame();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
@@ -26,6 +23,8 @@ public class LoginForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(loginPanel);
 
+        //Här finns användare för alla users som kan logga in
+        ArrayList<User> userList = userHandler.getAllUsers();
 
         loginButton.addActionListener(new ActionListener() {
 
@@ -44,13 +43,13 @@ public class LoginForm {
                     }
                 }
 
-                // If-statement to check if the user is customer, employee or doesn't exist as all
+                // If-statement to check if the user is customer, employee or doesn't exist at all
                 if(foundUser && tempUser.isWorking()){
-                    EmployeeForm employeeForm = new EmployeeForm();
+                    EmployeeForm employeeForm = new EmployeeForm(userHandler);
                     jFrame.setVisible(false);
                 }
                 else if (foundUser && !tempUser.isWorking()) {
-                    ShoppingForm shoppingForm = new ShoppingForm();
+                    ShoppingForm shoppingForm = new ShoppingForm(userHandler);
                     jFrame.setVisible(false);
                 }
                 else{
@@ -69,13 +68,5 @@ public class LoginForm {
     //Can make the Login form visible or hide it
     public void setVisibility(boolean isVisible){
         jFrame.setVisible(isVisible);
-    }
-
-    // Adds some users to userList
-    private ArrayList<User> createUsers(){
-        ArrayList<User> users = new ArrayList<>();
-        users.add(new Employee("Ulf", "Bo", "ulf.bo@mail.com", 400, "123"));
-        users.add(new Customer("Bo", "Ek", "BoEk", "Gatan", 302, "Halmstad", "1234"));
-        return users;
     }
 }

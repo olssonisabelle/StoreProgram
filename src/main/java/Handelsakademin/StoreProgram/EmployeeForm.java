@@ -1,6 +1,8 @@
 package Handelsakademin.StoreProgram;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EmployeeForm {
 
@@ -14,7 +16,7 @@ public class EmployeeForm {
     private JButton logOutButton;
     JFrame jFrame;
 
-    public EmployeeForm() {
+    public EmployeeForm(UserHandler userHandler) {
         jFrame = new JFrame();
         jFrame.setSize(700, 700);
         jFrame.setVisible(true);
@@ -25,7 +27,7 @@ public class EmployeeForm {
         createEmployeeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CreateEmployeeForm createEmployeeForm = new CreateEmployeeForm();
+                CreateEmployeeForm createEmployeeForm = new CreateEmployeeForm(userHandler);
                 jFrame.setVisible(false);
             }
         });
@@ -34,7 +36,7 @@ public class EmployeeForm {
             // logOutButton to get back to loginForm
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginForm loginForm = new LoginForm();
+                LoginForm loginForm = new LoginForm(userHandler);
                 loginForm.getLoginForm();
                 loginForm.setVisibility(true);
                 jFrame.dispose();
