@@ -1,6 +1,8 @@
 package Handelsakademin.StoreProgram;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EmployeeForm {
 
@@ -22,5 +24,15 @@ public class EmployeeForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(employeePanel);
 
+        logOutButton.addActionListener(new ActionListener() {
+            // logOutButton to get back to loginForm
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginForm loginForm = new LoginForm();
+                loginForm.getLoginForm();
+                loginForm.setVisibility(true);
+                jFrame.dispose();
+            }
+        });
     }
 }

@@ -1,6 +1,8 @@
 package Handelsakademin.StoreProgram;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ShoppingForm {
     private JPanel shoppingPanel;
@@ -20,5 +22,15 @@ public class ShoppingForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(shoppingPanel);
+        logOutButton.addActionListener(new ActionListener() {
+            // logOutButton to get back to loginForm
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginForm loginForm = new LoginForm();
+                loginForm.getLoginForm();
+                loginForm.setVisibility(true);
+                jFrame.dispose();
+            }
+        });
     }
 }
