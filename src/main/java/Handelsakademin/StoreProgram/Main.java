@@ -1,4 +1,4 @@
-package Handelsakademin.FarmProgram;
+package Handelsakademin.StoreProgram;
 
 public class Main {
     public static void main(String[] args) {
