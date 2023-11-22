@@ -13,8 +13,11 @@ public class ShoppingForm {
     private JButton addToCartButton;
     private JButton logOutButton;
     private JLabel userNameLable;
+    private JButton editCustomerButton;
+    private JButton checkOutButton;
     private JFrame jFrame;
     private LoginForm loginForm;
+    private ShoppingForm shoppingForm = this;
 
     public ShoppingForm() {
         jFrame = new JFrame();
@@ -31,10 +34,30 @@ public class ShoppingForm {
                 jFrame.dispose();
             }
         });
+        editCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditCustomerForm editCustomerForm = new EditCustomerForm();
+                editCustomerForm.setShoppingForm(shoppingForm);
+                jFrame.setVisible(false);
+            }
+        });
+        checkOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OrderForm orderForm = new OrderForm();
+                orderForm.setShoppingForm(shoppingForm);
+                jFrame.setVisible(false);
+            }
+        });
     }
 
     public void setLoginForm(LoginForm loginForm){
         this.loginForm = loginForm;
+    }
+
+    public void setVisibility(boolean isVisible){
+        jFrame.setVisible(isVisible);
     }
 
     //Fill in userNameLabel with the logged-in users full name

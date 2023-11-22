@@ -14,6 +14,9 @@ public class EmployeeForm {
     private JTextField quantityField;
     private JButton createNewProductButton;
     private JButton logOutButton;
+    private JButton goToChangeProfileButton;
+    private JList productJList;
+    private JButton goToInventoryButton;
     private JFrame jFrame;
     private LoginForm loginForm;
     private EmployeeForm employeeForm = this;
@@ -41,6 +44,23 @@ public class EmployeeForm {
             public void actionPerformed(ActionEvent e) {
                 loginForm.setVisibility(true);
                 jFrame.dispose();
+            }
+        });
+
+        goToChangeProfileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditEmployeeForm editEmployeeForm = new EditEmployeeForm();
+                editEmployeeForm.setEmployeeForm(employeeForm);
+                jFrame.setVisible(false);
+            }
+        });
+        goToInventoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InventoryForm inventoryForm = new InventoryForm();
+                inventoryForm.setEmployeeForm(employeeForm);
+                jFrame.setVisible(false);
             }
         });
     }

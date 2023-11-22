@@ -16,6 +16,7 @@ public class CreateEmployeeForm {
     private JPanel createEmployeePanel;
     private JLabel messageLabel;
     private JButton goBackButton;
+    private JList employeeJList;
     private EmployeeForm employeeForm;
 
     public CreateEmployeeForm() {
@@ -69,9 +70,17 @@ public class CreateEmployeeForm {
                 jFrame.dispose();
             }
         });
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                employeeForm.setVisibility(true);
+                jFrame.dispose();
+            }
+        });
     }
 
     public void setEmployeeForm(EmployeeForm employeeForm){
         this.employeeForm = employeeForm;
     }
+
 }
