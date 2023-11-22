@@ -8,7 +8,4 @@ public class Main {
         LoginForm loginForm = new LoginForm();
 
     }
-
-
-
 }

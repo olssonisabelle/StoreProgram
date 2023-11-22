@@ -70,13 +70,6 @@ public class CreateEmployeeForm {
                 jFrame.dispose();
             }
         });
-        goBackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                employeeForm.setVisibility(true);
-                jFrame.dispose();
-            }
-        });
     }
 
     public void setEmployeeForm(EmployeeForm employeeForm){

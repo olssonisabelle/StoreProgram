@@ -16,6 +16,8 @@ public class LoginForm {
 
     private UserHandler userHandler = new UserHandler();
 
+    private ProductHandler productHandler = new ProductHandler();
+
     private LoginForm loginForm = this;
 
     private User logedInUser = new User();
@@ -47,6 +49,8 @@ public class LoginForm {
                 //If-statement to check if the user is customer, employee or doesn't exist at all
                 if(foundUser && logedInUser.isWorking()){
                     EmployeeForm employeeForm = new EmployeeForm();
+                    //Add the product handler
+                    employeeForm.setProductHandler(productHandler);
                     //To send loginForm information to another form
                     employeeForm.setLoginForm(loginForm);
                     //Display logged-in users name.

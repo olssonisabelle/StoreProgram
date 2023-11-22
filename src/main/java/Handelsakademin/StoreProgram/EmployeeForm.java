@@ -17,9 +17,12 @@ public class EmployeeForm {
     private JButton goToChangeProfileButton;
     private JList productJList;
     private JButton goToInventoryButton;
+    private JTree tree1;
     private JFrame jFrame;
     private LoginForm loginForm;
     private EmployeeForm employeeForm = this;
+
+    private ProductHandler productHandler;
 
     public EmployeeForm() {
         jFrame = new JFrame();
@@ -34,6 +37,17 @@ public class EmployeeForm {
                 CreateEmployeeForm createEmployeeForm = new CreateEmployeeForm();
                 //To send employeeForm information to another form
                 createEmployeeForm.setEmployeeForm(employeeForm);
+                jFrame.setVisible(false);
+            }
+        });
+
+        createNewProductButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CreateProductForm createProductForm = new CreateProductForm();
+                createProductForm.setProductHandler(productHandler);
+                //To send employeeForm information to another form
+
                 jFrame.setVisible(false);
             }
         });
@@ -83,5 +97,9 @@ public class EmployeeForm {
     //Fill in userNameLabel with the logged-in users full name
     public void setUserNameLable(){
         employeeNameLabel.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
+    }
+
+    public void setProductHandler(ProductHandler productHandler) {
+        this.productHandler = productHandler;
     }
 }
