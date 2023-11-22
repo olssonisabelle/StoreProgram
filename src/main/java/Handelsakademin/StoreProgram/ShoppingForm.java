@@ -26,7 +26,7 @@ public class ShoppingForm {
             // logOutButton to get back to loginForm
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginForm loginForm = new LoginForm(userHandler);
+                LoginForm loginForm = new LoginForm();
                 loginForm.getLoginForm();
                 loginForm.setVisibility(true);
                 jFrame.dispose();

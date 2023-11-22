@@ -14,20 +14,23 @@ public class EmployeeForm {
     private JTextField quantityField;
     private JButton createNewProductButton;
     private JButton logOutButton;
-    JFrame jFrame;
+    private JFrame jFrame;
 
-    public EmployeeForm(UserHandler userHandler) {
+    private LoginForm loginform;
+
+    public EmployeeForm(LoginForm loginForm) {
         jFrame = new JFrame();
         jFrame.setSize(700, 700);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(employeePanel);
+        this.loginform = loginForm;
 
         createEmployeeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CreateEmployeeForm createEmployeeForm = new CreateEmployeeForm(userHandler);
+                CreateEmployeeForm createEmployeeForm = new CreateEmployeeForm();
                 jFrame.setVisible(false);
             }
         });
@@ -36,11 +39,16 @@ public class EmployeeForm {
             // logOutButton to get back to loginForm
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginForm loginForm = new LoginForm(userHandler);
-                loginForm.getLoginForm();
                 loginForm.setVisibility(true);
                 jFrame.dispose();
             }
         });
+    }
+
+    public EmployeeForm getEmployeeForm(){
+        return this;
+    }
+    public void setVisibility(boolean isVisible){
+        jFrame.setVisible(isVisible);
     }
 }

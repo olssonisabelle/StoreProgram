@@ -15,7 +15,11 @@ public class LoginForm {
     private JLabel messageLabel;
     private JFrame jFrame;
 
-    public LoginForm(UserHandler userHandler) {
+    private UserHandler userHandler = new UserHandler();
+
+    LoginForm loginForm = this;
+
+    public LoginForm() {
         jFrame = new JFrame();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
@@ -45,7 +49,7 @@ public class LoginForm {
 
                 // If-statement to check if the user is customer, employee or doesn't exist at all
                 if(foundUser && tempUser.isWorking()){
-                    EmployeeForm employeeForm = new EmployeeForm(userHandler);
+                    EmployeeForm employeeForm = new EmployeeForm(loginForm);
                     jFrame.setVisible(false);
                 }
                 else if (foundUser && !tempUser.isWorking()) {
@@ -68,5 +72,9 @@ public class LoginForm {
     //Can make the Login form visible or hide it
     public void setVisibility(boolean isVisible){
         jFrame.setVisible(isVisible);
+    }
+
+    public UserHandler getUserHandler() {
+        return userHandler;
     }
 }

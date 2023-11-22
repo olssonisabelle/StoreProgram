@@ -13,4 +13,8 @@ public class Customer extends User {
         this.zipCode = zipCode;
         this.city = city;
     }
+    @Override
+    public String getCSV(){
+        return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password + "," + streetName + "," + zipCode + "," + city;
+    }
 }

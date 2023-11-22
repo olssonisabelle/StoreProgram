@@ -20,6 +20,10 @@ public class User {
     public User() {
     }
 
+    public String getCSV(){
+        return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password;
+    }
+
     public String getEmail() {
         return email;
     }
