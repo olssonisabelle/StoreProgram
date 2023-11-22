@@ -15,22 +15,22 @@ public class EmployeeForm {
     private JButton createNewProductButton;
     private JButton logOutButton;
     private JFrame jFrame;
+    private LoginForm loginForm;
+    private EmployeeForm employeeForm = this;
 
-    private LoginForm loginform;
-
-    public EmployeeForm(LoginForm loginForm) {
+    public EmployeeForm() {
         jFrame = new JFrame();
         jFrame.setSize(700, 700);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(employeePanel);
-        this.loginform = loginForm;
-
         createEmployeeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CreateEmployeeForm createEmployeeForm = new CreateEmployeeForm();
+                //To send employeeForm information to another form
+                createEmployeeForm.setEmployeeForm(employeeForm);
                 jFrame.setVisible(false);
             }
         });
@@ -50,5 +50,18 @@ public class EmployeeForm {
     }
     public void setVisibility(boolean isVisible){
         jFrame.setVisible(isVisible);
+    }
+
+    public void setLoginForm(LoginForm loginForm){
+        this.loginForm = loginForm;
+    }
+
+    public LoginForm getLoginForm(){
+        return loginForm;
+    }
+
+    //Fill in userNameLabel with the logged-in users full name
+    public void setUserNameLable(){
+        employeeNameLabel.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
     }
 }

@@ -20,8 +20,17 @@ public class User {
     public User() {
     }
 
+    //To be able to use file handling with csv
     public String getCSV(){
         return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {

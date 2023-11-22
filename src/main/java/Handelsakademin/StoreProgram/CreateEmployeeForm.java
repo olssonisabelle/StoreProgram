@@ -10,18 +10,15 @@ public class CreateEmployeeForm {
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField emailField;
-
-    //TODO add salary field and remove unnecessary fields from Employee
     private JTextField salaryField;
     private JTextField passwordField;
     private JButton createEmployeeButton;
     private JPanel createEmployeePanel;
     private JLabel messageLabel;
     private JButton goBackButton;
+    private EmployeeForm employeeForm;
 
     public CreateEmployeeForm() {
-        LoginForm loginForm = new LoginForm();
-        loginForm.getLoginForm();
         jFrame = new JFrame();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
@@ -33,7 +30,6 @@ public class CreateEmployeeForm {
             public void actionPerformed(ActionEvent e) {
                 //Fetch all parameters from the JFrames
                 String firstName = firstNameField.getText();
-                //TODO ?? add new checkers if the fields are empty and show it to the user, the same goes for all other fields
                 String lastName = lastNameField.getText();
                 String email = emailField.getText();
                 int salary = 0;
@@ -44,10 +40,13 @@ public class CreateEmployeeForm {
                     messageLabel.setText("Please write a number for salary");
                 }
                 String password = passwordField.getText();
+                //Check if all fields are filled in to create a new employee
                 if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && salary > 0 && !password.isEmpty()) {
                     Employee newEmployee = new Employee(firstName, lastName, email, salary, password);
-                    loginForm.getUserHandler().addNewEmployee(newEmployee);
-                    messageLabel.setText("Successfully added new employee.");
+                    employeeForm.getLoginForm().getUserHandler().addNewEmployee(newEmployee);
+                    //Update user message
+                    messageLabel.setText("Successfully added new employee " + firstName + ".");
+                    //Reset textFields
                     firstNameField.setText("");
                     lastNameField.setText("");
                     emailField.setText("");
@@ -63,10 +62,13 @@ public class CreateEmployeeForm {
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //EmployeeForm employeeForm = new EmployeeForm();
-
+                employeeForm.setVisibility(true);
+                jFrame.dispose();
             }
         });
     }
 
+    public void setEmployeeForm(EmployeeForm employeeForm){
+        this.employeeForm = employeeForm;
+    }
 }

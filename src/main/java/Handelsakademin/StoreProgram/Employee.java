@@ -9,6 +9,8 @@ public class Employee extends User{
         nextId ++;
         this.salary = salary;
     }
+
+    //To be able to use file handling with csv
     @Override
     public String getCSV(){
         return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password + "," + salary;

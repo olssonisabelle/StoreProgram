@@ -16,8 +16,11 @@ public class CreateCustomerForm {
     private JTextField cityField;
     private JTextField passwordField;
     private JButton createCustomerButton;
+    private JLabel messageLabel;
+    private JButton goBackButton;
+    private LoginForm loginForm;
 
-    public CreateCustomerForm(UserHandler userHandler) {
+    public CreateCustomerForm() {
         jFrame = new JFrame();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
@@ -29,9 +32,6 @@ public class CreateCustomerForm {
             public void actionPerformed(ActionEvent e) {
                 //Fetch all parameters from the JFrames
                 String firstName = firstNameField.getText();
-                if(firstName.isEmpty()) {
-                    //TODO ?? add new checkers if the fields are empty and show it to the user, the same goes for all other fields
-                }
                 String lastName = lastNameField.getText();
                 String email = emailField.getText();
                 String street = streetField.getText();
@@ -39,19 +39,39 @@ public class CreateCustomerForm {
                 try {
                     zipCode = Integer.parseInt(zipCodeField.getText());
                 } catch (Exception ex) {
-
+                    messageLabel.setText("Please write a number for zip code.");
                 }
                 String city = cityField.getText();
                 String password = passwordField.getText();
-                Customer newCustomer = new Customer(firstName,
-                        lastName,
-                        email,
-                        street,
-                        zipCode,
-                        city,
-                        password);
-                userHandler.addNewCustomer(newCustomer);
+                if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !street.isEmpty() && zipCode > 0 && !city.isEmpty() && !password.isEmpty()) {
+                    Customer newCustomer = new Customer(firstName, lastName, email, street, zipCode, city, password);
+                    loginForm.getUserHandler().addNewCustomer(newCustomer);
+                    //Update user message
+                    messageLabel.setText("Successfully added new customer " + firstName + ".");
+                    //Reset textFields
+                    firstNameField.setText("");
+                    lastNameField.setText("");
+                    emailField.setText("");
+                    streetField.setText("");
+                    zipCodeField.setText("");
+                    cityField.setText("");
+                    passwordField.setText("");
+                }
+                else{
+                    messageLabel.setText("Not enough information provided for creating a new customer.");
+                }
             }
         });
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loginForm.setVisibility(true);
+                jFrame.dispose();
+            }
+        });
+    }
+
+    public void setLoginForm(LoginForm loginForm){
+        this.loginForm = loginForm;
     }
 }

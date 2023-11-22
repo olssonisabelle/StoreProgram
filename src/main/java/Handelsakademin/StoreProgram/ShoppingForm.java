@@ -12,10 +12,11 @@ public class ShoppingForm {
     private JTextField quantityField;
     private JButton addToCartButton;
     private JButton logOutButton;
+    private JLabel userNameLable;
+    private JFrame jFrame;
+    private LoginForm loginForm;
 
-    JFrame jFrame;
-
-    public ShoppingForm(UserHandler userHandler) {
+    public ShoppingForm() {
         jFrame = new JFrame();
         jFrame.setSize(700, 700);
         jFrame.setVisible(true);
@@ -23,14 +24,21 @@ public class ShoppingForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(shoppingPanel);
         logOutButton.addActionListener(new ActionListener() {
-            // logOutButton to get back to loginForm
+            //logOutButton to get back to loginForm
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginForm loginForm = new LoginForm();
-                loginForm.getLoginForm();
                 loginForm.setVisibility(true);
                 jFrame.dispose();
             }
         });
+    }
+
+    public void setLoginForm(LoginForm loginForm){
+        this.loginForm = loginForm;
+    }
+
+    //Fill in userNameLabel with the logged-in users full name
+    public void setUserNameLable(){
+        userNameLable.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
     }
 }

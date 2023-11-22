@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class LoginForm {
     private JPanel loginPanel;
@@ -17,7 +16,9 @@ public class LoginForm {
 
     private UserHandler userHandler = new UserHandler();
 
-    LoginForm loginForm = this;
+    private LoginForm loginForm = this;
+
+    private User logedInUser = new User();
 
     public LoginForm() {
         jFrame = new JFrame();
@@ -26,35 +27,39 @@ public class LoginForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(loginPanel);
-
-        //Här finns användare för alla users som kan logga in
+        //A list of all users
         ArrayList<User> userList = userHandler.getAllUsers();
-
         loginButton.addActionListener(new ActionListener() {
-
-            // When the loginButton is pressed the userList is checked
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean foundUser = false;
-                User tempUser = new User();
+                //Check userList for log in attempt
                 for(User user: userList){
                     if(emailField.getText().equals(user.getEmail())){
                         if(passwordField.getText().equals(user.getPassword())){
                             foundUser = true;
-                            tempUser = user;
+                            logedInUser = user;
                             break;
                         }
                     }
                 }
 
-                // If-statement to check if the user is customer, employee or doesn't exist at all
-                if(foundUser && tempUser.isWorking()){
-                    EmployeeForm employeeForm = new EmployeeForm(loginForm);
-                    jFrame.setVisible(false);
+                //If-statement to check if the user is customer, employee or doesn't exist at all
+                if(foundUser && logedInUser.isWorking()){
+                    EmployeeForm employeeForm = new EmployeeForm();
+                    //To send loginForm information to another form
+                    employeeForm.setLoginForm(loginForm);
+                    //Display logged-in users name.
+                    employeeForm.setUserNameLable();
+                    hideAndEmptyFields();
                 }
-                else if (foundUser && !tempUser.isWorking()) {
-                    ShoppingForm shoppingForm = new ShoppingForm(userHandler);
-                    jFrame.setVisible(false);
+                else if (foundUser && !logedInUser.isWorking()) {
+                    ShoppingForm shoppingForm = new ShoppingForm();
+                    //To send loginForm information to another form
+                    shoppingForm.setLoginForm(loginForm);
+                    //Display logged-in users name.
+                    shoppingForm.setUserNameLable();
+                    hideAndEmptyFields();
                 }
                 else{
                    messageLabel.setText("Incorrect username or password");
@@ -62,9 +67,16 @@ public class LoginForm {
 
             }
         });
+        createNewUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CreateCustomerForm createCustomerForm = new CreateCustomerForm();
+                createCustomerForm.setLoginForm(loginForm);
+            }
+        });
     }
 
-    // Use this when wanting access to the loginForm in other forms
+    //Use this when wanting access to the loginForm in other forms
     public LoginForm getLoginForm(){
         return this;
     }
@@ -76,5 +88,15 @@ public class LoginForm {
 
     public UserHandler getUserHandler() {
         return userHandler;
+    }
+    //To reset fields and hide form
+    private void hideAndEmptyFields(){
+        jFrame.setVisible(false);
+        emailField.setText("");
+        passwordField.setText("");
+        messageLabel.setText("");
+    }
+    public User getLogedInUser(){
+        return logedInUser;
     }
 }

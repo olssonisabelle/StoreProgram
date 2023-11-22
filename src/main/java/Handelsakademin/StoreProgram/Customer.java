@@ -14,7 +14,7 @@ public class Customer extends User {
         this.city = city;
     }
     @Override
-    public String getCSV(){
+    public String getCSV(){ //to be able to use file handling with csv
         return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password + "," + streetName + "," + zipCode + "," + city;
     }
 }
