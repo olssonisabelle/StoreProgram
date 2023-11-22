@@ -13,6 +13,17 @@ public class Customer extends User {
         this.zipCode = zipCode;
         this.city = city;
     }
+
+    //Constructor to use when using file handling
+    public Customer(int id, String firstName, String lastName, String email, Boolean working, String password, String streetName, int zipCode, String city){
+        super(id,firstName,lastName,email,working,password);
+        if(id >= nextId) {
+            nextId = id + 1;
+        }
+        this.streetName = streetName;
+        this.zipCode = zipCode;
+        this.city = city;
+    }
     @Override
     public String getCSV(){ //to be able to use file handling with csv
         return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password + "," + streetName + "," + zipCode + "," + city;

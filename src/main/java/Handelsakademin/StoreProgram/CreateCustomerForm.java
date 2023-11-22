@@ -45,7 +45,10 @@ public class CreateCustomerForm {
                 String password = passwordField.getText();
                 if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !street.isEmpty() && zipCode > 0 && !city.isEmpty() && !password.isEmpty()) {
                     Customer newCustomer = new Customer(firstName, lastName, email, street, zipCode, city, password);
+                    //Add customer to userList
                     loginForm.getUserHandler().addNewCustomer(newCustomer);
+                    //Save userList to file
+                    loginForm.getUserHandler().saveUserFile();
                     //Update user message
                     messageLabel.setText("Successfully added new customer " + firstName + ".");
                     //Reset textFields

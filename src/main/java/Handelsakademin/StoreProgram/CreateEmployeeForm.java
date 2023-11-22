@@ -43,7 +43,10 @@ public class CreateEmployeeForm {
                 //Check if all fields are filled in to create a new employee
                 if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && salary > 0 && !password.isEmpty()) {
                     Employee newEmployee = new Employee(firstName, lastName, email, salary, password);
+                    //Add employee to userList
                     employeeForm.getLoginForm().getUserHandler().addNewEmployee(newEmployee);
+                    //Save userList to file
+                    employeeForm.getLoginForm().getUserHandler().saveUserFile();
                     //Update user message
                     messageLabel.setText("Successfully added new employee " + firstName + ".");
                     //Reset textFields
