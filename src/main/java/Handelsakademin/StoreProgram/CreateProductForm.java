@@ -12,6 +12,9 @@ public class CreateProductForm {
     private JTextField priceField;
     private JTextField quantityField;
     private JButton goBackButton;
+    private JList list1;
+
+    private EmployeeForm employeeForm;
 
     private ProductHandler productHandler;
 
@@ -28,25 +31,36 @@ public class CreateProductForm {
             public void actionPerformed(ActionEvent e) {
                 if (!nameField.getText().isEmpty() && !priceField.getText().isEmpty() && !quantityField.getText().isEmpty()) {
                     String productName = nameField.getText();
-                int productPrice = 0;
-                int productQuantity = 0;
-                try {
-                    productPrice = Integer.parseInt(priceField.getText());
-                    productQuantity = Integer.parseInt(quantityField.getText());
-                } catch (Exception ex) {
-                    //TODO uppdatera message field får bara finnas siffror i price och quantity
-                }
-                productHandler.addProduct(productName, productPrice, productQuantity);
+                    int productPrice = 0;
+                    int productQuantity = 0;
+                    try {
+                        productPrice = Integer.parseInt(priceField.getText());
+                        productQuantity = Integer.parseInt(quantityField.getText());
+                    } catch (Exception ex) {
+                        //TODO uppdatera message field får bara finnas siffror i price och quantity
+                    }
+                    productHandler.addProduct(productName, productPrice, productQuantity);
                     //TODO uppdatera message field med success
 
                 } else {
-                    //TODO uppdatera message field fyll i alla fields
+                   //TODO uppdatera message field fyll i alla fields
                 }
+            }
+        });
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                employeeForm.setVisibility(true);
+                jFrame.dispose();
             }
         });
     }
 
-    public void setProductHandler(ProductHandler productHandler) {
-        this.productHandler = productHandler;
+    public void setEmployeeForm(EmployeeForm employeeForm) {
+        this.employeeForm = employeeForm;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

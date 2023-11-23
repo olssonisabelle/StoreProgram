@@ -9,15 +9,10 @@ public class EmployeeForm {
     private JPanel employeePanel;
     private JLabel employeeNameLabel;
     private JButton createEmployeeButton;
-    private JTextField nameField;
-    private JTextField priceField;
-    private JTextField quantityField;
     private JButton createNewProductButton;
     private JButton logOutButton;
     private JButton goToChangeProfileButton;
-    private JList productJList;
     private JButton goToInventoryButton;
-    private JTree tree1;
     private JFrame jFrame;
     private LoginForm loginForm;
     private EmployeeForm employeeForm = this;
@@ -45,7 +40,7 @@ public class EmployeeForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CreateProductForm createProductForm = new CreateProductForm();
-                createProductForm.setProductHandler(productHandler);
+                createProductForm.setEmployeeForm(employeeForm);
                 //To send employeeForm information to another form
 
                 jFrame.setVisible(false);
@@ -78,6 +73,7 @@ public class EmployeeForm {
             }
         });
     }
+
 
     public EmployeeForm getEmployeeForm(){
         return this;
