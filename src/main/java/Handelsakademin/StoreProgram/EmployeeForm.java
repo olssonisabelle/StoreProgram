@@ -65,7 +65,7 @@ public class EmployeeForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditEmployeeForm editEmployeeForm = new EditEmployeeForm();
-                editEmployeeForm.setEmployeeForm(employeeForm);
+                editEmployeeForm.setEmployeeInformation(employeeForm);
                 jFrame.setVisible(false);
             }
         });

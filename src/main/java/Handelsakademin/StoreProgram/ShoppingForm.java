@@ -38,7 +38,7 @@ public class ShoppingForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditCustomerForm editCustomerForm = new EditCustomerForm();
-                editCustomerForm.setShoppingForm(shoppingForm);
+                editCustomerForm.setCustomerInformation(shoppingForm);
                 jFrame.setVisible(false);
             }
         });
@@ -58,6 +58,9 @@ public class ShoppingForm {
 
     public void setVisibility(boolean isVisible){
         jFrame.setVisible(isVisible);
+    }
+    public LoginForm getLoginForm(){
+        return loginForm;
     }
 
     //Fill in userNameLabel with the logged-in users full name

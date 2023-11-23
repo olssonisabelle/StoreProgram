@@ -1,6 +1,4 @@
-0,Ulf,Bo,ulfbo,true,123,400
-0,Bo,Ek,BoEk,false,1234,Gatan,302,Halmstad
-0,Ulf,Bo,ulfbo,true,123,400
+0,Ulf,Bo,ulfbo,true,123,40
 0,Bo,Ek,BoEk,false,1234,Gatan,302,Halmstad
 1,Ann,Ek,annek,true,123,2131
-1,Per,Ek,perek,false,123,Gränd,5642,Staden
+1,Pär,Ek,pärek,false,123,Gränd,5642,Stad

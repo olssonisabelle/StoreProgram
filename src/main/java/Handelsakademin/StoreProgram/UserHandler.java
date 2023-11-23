@@ -13,9 +13,7 @@ public class UserHandler {
 
 
     public UserHandler() {
-        //Hard coded test users
-        userList.add(new Employee("Ulf", "Bo", "ulfbo", 400, "123"));
-        userList.add(new Customer("Bo", "Ek", "BoEk", "Gatan", 302, "Halmstad", "1234"));
+
     }
 
     //Returns a list of customer users
@@ -55,6 +53,26 @@ public class UserHandler {
     //Adds a new employee to userList
     public void addNewEmployee(Employee employee) {
         userList.add(employee);
+    }
+
+    // Update employee using their id
+    public void changeEmployee(Employee employee){
+        for(User user: userList){
+            if(user.isWorking() && employee.getId() == user.getId()){
+                user = employee;
+                return;
+            }
+        }
+    }
+
+    // Update customer using their id
+    public void changeCustomer(Customer customer){
+        for(User user: userList){
+            if(!user.isWorking() && customer.getId() == user.getId()){
+                user = customer;
+                return;
+            }
+        }
     }
 
     //Create users from file if file exists otherwise create some default users
@@ -103,12 +121,14 @@ public class UserHandler {
                 System.out.println("Error, something went wrong.");
             }
         }
-        else{
+        else if(!userFile.exists()){
             //Hard coded test users
             userList.add(new Employee("Ulf", "Bo", "ulfbo", 400, "123"));
             userList.add(new Customer("Bo", "Ek", "BoEk", "Gatan", 302, "Halmstad", "1234"));
         }
     }
+
+    // Saves the userList in a file
     public void saveUserFile(){
         try{
             FileWriter fw = new FileWriter(userFile);

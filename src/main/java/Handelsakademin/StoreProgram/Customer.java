@@ -28,4 +28,28 @@ public class Customer extends User {
     public String getCSV(){ //to be able to use file handling with csv
         return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password + "," + streetName + "," + zipCode + "," + city;
     }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }
