@@ -27,4 +27,12 @@ public class Employee extends User{
     public String getCSV(){
         return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password + "," + salary;
     }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
 }
