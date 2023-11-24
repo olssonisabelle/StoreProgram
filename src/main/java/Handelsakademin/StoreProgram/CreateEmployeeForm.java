@@ -3,6 +3,7 @@ package Handelsakademin.StoreProgram;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CreateEmployeeForm {
 
@@ -17,6 +18,8 @@ public class CreateEmployeeForm {
     private JLabel messageLabel;
     private JButton goBackButton;
     private JList employeeJList;
+    private JLabel employeeNameLable;
+    private DefaultListModel defaultListModel = new DefaultListModel<>();
     private EmployeeForm employeeForm;
 
     public CreateEmployeeForm() {
@@ -26,6 +29,7 @@ public class CreateEmployeeForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(createEmployeePanel);
+        employeeJList.setModel(defaultListModel);
         createEmployeeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,7 +64,7 @@ public class CreateEmployeeForm {
                 else{
                     messageLabel.setText("Not enough information provided for creating a new employee");
                 }
-
+                refreshList();
             }
         });
         goBackButton.addActionListener(new ActionListener() {
@@ -74,6 +78,24 @@ public class CreateEmployeeForm {
 
     public void setEmployeeForm(EmployeeForm employeeForm){
         this.employeeForm = employeeForm;
+        setUserNameLable();
+        refreshList();
+    }
+
+    private void refreshList(){
+        //First, remove all elements from the list.
+        defaultListModel.removeAllElements();
+        //Get employeeList from userHandler class
+        ArrayList<User> employeesList = employeeForm.getLoginForm().getUserHandler().getEmployees();
+        //Add first and last name of the employees to the list
+        for(User user: employeesList){
+            defaultListModel.addElement(user.getFirstName() + " " + user.getLastName());
+        }
+    }
+
+    //Fill in userNameLabel with the logged-in users full name
+    public void setUserNameLable(){
+        employeeNameLable.setText(employeeForm.getLoginForm().getLogedInUser().getFirstName() + " " + employeeForm.getLoginForm().getLogedInUser().getLastName());
     }
 
 }
