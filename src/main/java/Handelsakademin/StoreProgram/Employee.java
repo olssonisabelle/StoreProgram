@@ -24,8 +24,8 @@ public class Employee extends User{
 
     //To be able to use file handling with csv
     @Override
-    public String getCSV(){
-        return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password + "," + salary;
+    public String getCSV(String delimiter){
+        return id + delimiter + firstName + delimiter + lastName + delimiter + email + delimiter + working + delimiter + password + delimiter + salary;
     }
 
     public int getSalary() {

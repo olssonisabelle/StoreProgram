@@ -12,4 +12,8 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public String getCSV(String delimiter){
+        return id + delimiter + name + delimiter + price + delimiter + quantity;
+    }
 }

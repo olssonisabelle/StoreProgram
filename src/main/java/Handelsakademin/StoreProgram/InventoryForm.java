@@ -3,6 +3,7 @@ package Handelsakademin.StoreProgram;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class InventoryForm {
     private JPanel inventoryPanel;
@@ -13,6 +14,7 @@ public class InventoryForm {
     private JButton goBackButton;
     private JFrame jFrame;
     private EmployeeForm employeeForm;
+    private DefaultListModel listModel = new DefaultListModel<>();
 
     public InventoryForm() {
         jFrame = new JFrame();
@@ -21,6 +23,7 @@ public class InventoryForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(inventoryPanel);
+        orderList.setModel(listModel);
 
         goBackButton.addActionListener(new ActionListener() {
             @Override
@@ -33,5 +36,20 @@ public class InventoryForm {
 
     public void setEmployeeForm(EmployeeForm employeeForm){
         this.employeeForm = employeeForm;
+        refreshList();
+    }
+
+    private void refreshList() {
+        //First, remove all elements from the list.
+        listModel.removeAllElements();
+        //Get orderList from orderHandler class
+        OrderHandler orderHandler = new OrderHandler();
+        orderHandler.readOrderList();
+        ArrayList<Order> orders = orderHandler.getOrderList();
+        //Add element to list
+        for (Order order : orders) {
+            listModel.addElement(order.getId());
+        }
+
     }
 }

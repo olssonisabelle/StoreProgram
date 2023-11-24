@@ -21,8 +21,8 @@ public class User {
     }
 
     //To be able to use file handling with csv
-    public String getCSV(){
-        return id + "," + firstName + "," + lastName + "," + email + "," + working + "," + password;
+    public String getCSV(String delimiter){
+        return id + delimiter + firstName + delimiter + lastName + delimiter + email + delimiter + working + delimiter + password;
     }
 
     public String getFirstName() {

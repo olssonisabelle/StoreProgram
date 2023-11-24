@@ -135,7 +135,7 @@ public class UserHandler {
             BufferedWriter bw = new BufferedWriter(fw);
             for(int i = 0; i < userList.size(); i++){
                 //Write user to file
-                bw.write(userList.get(i).getCSV());
+                bw.write(userList.get(i).getCSV(","));
                 //So the file don't end with new line
                 if(i < userList.size() - 1){
                     bw.newLine();

@@ -17,6 +17,15 @@ public class Order {
         this.customer = customer;
     }
 
+    public Order(int id, ArrayList<Product> productList, Customer customer) {
+        this.id = id;
+        if(this.id >= nextId) {
+            nextId = id + 1;
+        }
+        this.productList = productList;
+        this.customer = customer;
+    }
+
     public int getId() {
         return id;
     }
@@ -28,5 +37,19 @@ public class Order {
 
     public void setProductList(ArrayList<Product> productList) {
         this.productList = productList;
+    }
+    private String getProductListCSV(String delimiter){
+        String temp = "";
+        for(int i = 0; i < productList.size(); i++){
+            temp += productList.get(i).getCSV("&");
+            if(i < productList.size() - 1){
+                temp += delimiter;
+            }
+        }
+        return temp;
+    }
+    public String getCSV(){
+        String str = getProductListCSV("/");
+        return id + "," + str + "," + customer.getId();
     }
 }
