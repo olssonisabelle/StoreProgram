@@ -2,6 +2,8 @@ package Handelsakademin.StoreProgram;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class OrderHandler {
     private ArrayList<Order> orderList = new ArrayList<>();
@@ -10,14 +12,15 @@ public class OrderHandler {
     public OrderHandler(){
 
     }
-    public void addNewOrder(ArrayList<Product> productList, Customer customer){
-        orderList.add(new Order(productList,customer));
+    public void addNewOrder(Order order){
+        orderList.add(order);
     }
     public ArrayList<Order> getOrderList(){
         return orderList;
     }
 
     public void readOrderList(){
+        orderList.clear();
         try {
             FileReader fr = new FileReader(orderFile);
             BufferedReader br = new BufferedReader(fr);
@@ -28,6 +31,7 @@ public class OrderHandler {
             String delimiterOrder = ",";
             String delimiterProductList = "/";
             String delimiterProduct = "&";
+            String tempString = "";
             //Variable for order number
             int idOrder;
             //Variables for Customer
@@ -44,12 +48,27 @@ public class OrderHandler {
                 tempArr = line.split(delimiterOrder);
                 //Placeholder for order id
                 idOrder = Integer.parseInt(tempArr[0]);
-                //Divide productList into individual products
-                tempArr1 = tempArr[1].split(delimiterProductList);
-                //Divide individual product into product variables
-                tempArr2 = tempArr1[1].split(delimiterProduct);
+                // Checks if there are multiple product in order or not
+                if(tempArr[1].contains(delimiterProductList)) {
+                    tempArr1 = tempArr[1].split(delimiterProductList);
+                    // tempString to be able to separate productList containing more than 1 product
+                    tempString = "";
+                    // Adds all the product together with only one kind of delimiter
+                    for(int i = 0; i < tempArr1.length; i++) {
+                        tempString += tempArr1[i];
+                        if(i < tempArr1.length-1){
+                            tempString += delimiterProduct;
+                        }
+                    }
+                    //Divide individual product into product variables
+                    tempArr2 = tempString.split(delimiterProduct);
+                }
+                else{
+                    //Divide individual product into product variables
+                    tempArr2 = tempArr[1].split(delimiterProduct);
+                }
                 //Create products from product variables
-                for(int i = 0; i < tempArr2.length; i+=4) {
+                for (int i = 0; i < tempArr2.length; i += 4) {
                     idProduct = Integer.parseInt(tempArr2[i]);
                     name = tempArr2[i + 1];
                     price = Integer.parseInt(tempArr2[i + 2]);
@@ -59,22 +78,29 @@ public class OrderHandler {
                     //Add product to list
                     productList.add(product);
                 }
+
                 idCustomer = Integer.parseInt(tempArr[2]);
                 UserHandler userHandler = new UserHandler();
                 userHandler.readUserFile();
-                userHandler.getCustomers();
-                for(User user: userHandler.getCustomers()){
+                ArrayList <User> customerList = userHandler.getCustomers();
+                for(User user: customerList){
                     if(user.getId() == idCustomer){
                         customer = (Customer) user;
+                        break;
                     }
                 }
                 if(customer !=null) {
                     //Create order from file
-                    Order order = new Order(idOrder, productList, customer);
+                    ArrayList <Product> tempProductList = new ArrayList<>();
+                    for(Product product: productList){
+                        tempProductList.add(product);
+                    }
+                    Order order = new Order(idOrder, tempProductList, customer);
                     //Add to list
                     orderList.add(order);
                 }
                 line = br.readLine();
+                productList.clear();
             }
             br.close();
         }
@@ -83,7 +109,7 @@ public class OrderHandler {
         }
     }
 
-    public void saveOrderLst(){
+    public void saveOrderList(){
         try{
             FileWriter fw = new FileWriter(orderFile);
             BufferedWriter bw = new BufferedWriter(fw);
