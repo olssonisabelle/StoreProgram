@@ -23,6 +23,7 @@ public class InventoryForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(inventoryPanel);
+        jFrame.pack();
         orderList.setModel(listModel);
 
         goBackButton.addActionListener(new ActionListener() {

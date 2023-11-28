@@ -28,7 +28,7 @@ public class OrderForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(orderPanel);
-
+        jFrame.pack();
 
         goBackButton.addActionListener(new ActionListener() {
             @Override

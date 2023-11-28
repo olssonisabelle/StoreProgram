@@ -26,6 +26,7 @@ public class ShoppingForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(shoppingPanel);
+        jFrame.pack();
         logOutButton.addActionListener(new ActionListener() {
             //logOutButton to get back to loginForm
             @Override

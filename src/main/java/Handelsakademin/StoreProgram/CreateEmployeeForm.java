@@ -29,6 +29,7 @@ public class CreateEmployeeForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(createEmployeePanel);
+        jFrame.pack();
         employeeJList.setModel(defaultListModel);
         createEmployeeButton.addActionListener(new ActionListener() {
             @Override
