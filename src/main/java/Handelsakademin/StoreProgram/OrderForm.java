@@ -34,7 +34,7 @@ public class OrderForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(orderPanel);
         productCartJList.setModel(defaultListModel);
-        jFrame.pack();git
+        jFrame.pack();
 
         goBackButton.addActionListener(new ActionListener() {
             @Override

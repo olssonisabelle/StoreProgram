@@ -3,6 +3,8 @@ package Handelsakademin.StoreProgram;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.util.ArrayList;
 
 public class CreateProductForm {
     private JFrame jFrame;
@@ -12,11 +14,13 @@ public class CreateProductForm {
     private JTextField priceField;
     private JTextField quantityField;
     private JButton goBackButton;
-    private JList list1;
+    private JList existingProductsList;
+    private JLabel messageLabel;
 
     private EmployeeForm employeeForm;
 
     private ProductHandler productHandler;
+
 
     public CreateProductForm() {
         jFrame = new JFrame();
@@ -26,6 +30,7 @@ public class CreateProductForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(createProductPanel);
         jFrame.pack();
+        ProductHandler productHandler = new ProductHandler();
 
         createProductButton.addActionListener(new ActionListener() {
             @Override
@@ -38,13 +43,13 @@ public class CreateProductForm {
                         productPrice = Integer.parseInt(priceField.getText());
                         productQuantity = Integer.parseInt(quantityField.getText());
                     } catch (Exception ex) {
-                        //TODO uppdatera message field får bara finnas siffror i price och quantity
+                        messageLabel.setText("Please write a number for price and/or quantity");
                     }
                     productHandler.addProduct(productName, productPrice, productQuantity);
-                    //TODO uppdatera message field med success
+                    messageLabel.setText("Product successfully added");
 
                 } else {
-                   //TODO uppdatera message field fyll i alla fields
+                    messageLabel.setText("Please update all fields");
                 }
             }
         });
@@ -56,12 +61,8 @@ public class CreateProductForm {
             }
         });
     }
-
     public void setEmployeeForm(EmployeeForm employeeForm) {
         this.employeeForm = employeeForm;
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }
