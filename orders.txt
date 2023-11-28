@@ -3,3 +3,4 @@
 3,5&T-shirt&150&5/7&Jacket&700&1,1
 4,9&Pants&200&2/10&Jacket&700&1,1
 5,1&T-shirt&150&2/3&Jacket&700&1,0
+6,1&T-shirt&150&1/2&Pants&200&3/3&Jacket&700&1,0

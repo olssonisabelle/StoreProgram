@@ -21,12 +21,12 @@ public class EmployeeForm {
 
     public EmployeeForm() {
         jFrame = new JFrame();
+        jFrame.pack();
         jFrame.setSize(700, 700);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(employeePanel);
-        jFrame.pack();
         createEmployeeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

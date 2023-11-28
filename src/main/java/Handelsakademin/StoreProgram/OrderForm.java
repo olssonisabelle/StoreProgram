@@ -28,13 +28,13 @@ public class OrderForm {
 
     public OrderForm() {
         jFrame = new JFrame();
+        jFrame.pack();
         jFrame.setSize(700, 700);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(orderPanel);
         productCartJList.setModel(defaultListModel);
-        jFrame.pack();
 
         goBackButton.addActionListener(new ActionListener() {
             @Override

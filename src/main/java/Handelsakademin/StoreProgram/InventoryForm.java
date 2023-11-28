@@ -24,12 +24,12 @@ public class InventoryForm {
 
     public InventoryForm() {
         jFrame = new JFrame();
+        jFrame.pack();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(inventoryPanel);
-        jFrame.pack();
         orderList.setModel(listModel);
         chosenOrderList.setModel(secondListModel);
 
@@ -58,6 +58,7 @@ public class InventoryForm {
     public void setEmployeeForm(EmployeeForm employeeForm){
         this.employeeForm = employeeForm;
         refreshOrderList();
+        setUserNameLable();
     }
 
     private void refreshOrderList() {
@@ -81,5 +82,8 @@ public class InventoryForm {
             secondListModel.addElement(product.getName() + ", " + product.getQuantity());
         }
 
+    }
+    public void setUserNameLable(){
+        employeeNameLabel.setText(employeeForm.getLoginForm().getLogedInUser().getFirstName() + " " + employeeForm.getLoginForm().getLogedInUser().getLastName());
     }
 }

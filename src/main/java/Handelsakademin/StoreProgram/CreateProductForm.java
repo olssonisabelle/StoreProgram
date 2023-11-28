@@ -1,6 +1,8 @@
 package Handelsakademin.StoreProgram;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -17,20 +19,46 @@ public class CreateProductForm {
     private JList existingProductsList;
     private JLabel messageLabel;
 
+    private ArrayList <Product> productList;
+
     private EmployeeForm employeeForm;
+
+    private DefaultListModel defaultListModel = new DefaultListModel<>();
 
     private ProductHandler productHandler;
 
 
     public CreateProductForm() {
         jFrame = new JFrame();
+        jFrame.pack();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(createProductPanel);
-        jFrame.pack();
+        existingProductsList.setModel(defaultListModel);
         ProductHandler productHandler = new ProductHandler();
+
+        productHandler.readProductFile();
+        productList = productHandler.getProductList();
+        // Adds all product to the JList
+        for(Product product: productList){
+            defaultListModel.addElement(product.getName());
+        }
+
+        existingProductsList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Clears the messageLabel
+                messageLabel.setText("");
+                // Gets the chosen index
+                int index = existingProductsList.getSelectedIndex();
+                // Sets the labels to display the chosen product information
+                nameField.setText(productList.get(index).getName());
+                priceField.setText(Integer.toString(productList.get(index).getPrice()));
+                quantityField.setText(Integer.toString(productList.get(index).getQuantity()));
+            }
+        });
 
         createProductButton.addActionListener(new ActionListener() {
             @Override
@@ -47,12 +75,14 @@ public class CreateProductForm {
                     }
                     productHandler.addProduct(productName, productPrice, productQuantity);
                     messageLabel.setText("Product successfully added");
-
+                    refreshJList();
+                    productHandler.saveProductFile();
                 } else {
                     messageLabel.setText("Please update all fields");
                 }
             }
         });
+
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,5 +94,11 @@ public class CreateProductForm {
     public void setEmployeeForm(EmployeeForm employeeForm) {
         this.employeeForm = employeeForm;
     }
-
+private void refreshJList() {
+    defaultListModel.removeAllElements();
+    // Adds all product to the JList
+    for(Product product: productList) {
+        defaultListModel.addElement(product.getName());
+    }
+    }
 }

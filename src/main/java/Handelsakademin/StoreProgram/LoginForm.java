@@ -24,12 +24,12 @@ public class LoginForm {
 
     public LoginForm() {
         jFrame = new JFrame();
+        jFrame.pack();
         jFrame.setSize(500, 500);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(loginPanel);
-        jFrame.pack();
         //A list of all users
         ArrayList<User> userList = userHandler.getAllUsers();
         loginButton.addActionListener(new ActionListener() {

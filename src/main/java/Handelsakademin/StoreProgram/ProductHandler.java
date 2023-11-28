@@ -1,11 +1,13 @@
 package Handelsakademin.StoreProgram;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
 public class ProductHandler {
 
     private ArrayList<Product> productList = new ArrayList<>();
+
     private File productFile = new File("products.txt");
 
     public ProductHandler() {

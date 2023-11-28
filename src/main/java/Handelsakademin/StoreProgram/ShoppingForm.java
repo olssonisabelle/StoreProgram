@@ -33,13 +33,13 @@ public class ShoppingForm {
 
     public ShoppingForm() {
         jFrame = new JFrame();
+        jFrame.pack();
         jFrame.setSize(700, 700);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(shoppingPanel);
         productJList.setModel(defaultListModel);
-        jFrame.pack();
 
         // Reads the productFile and updates productList
         productHandler.readProductFile();
