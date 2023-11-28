@@ -3,3 +3,4 @@
 1,Ann,Ek,annek,true,123,2131
 1,Per,Ek,perek,false,123,Gränd,5642,Stad
 2,Ulf,Bo,ulfbo,true,123,1234
+2,michaela,m,mm,false,123,mm,7777,City

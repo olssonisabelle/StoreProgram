@@ -18,6 +18,9 @@ public class CreateProductForm {
     private JButton goBackButton;
     private JList existingProductsList;
     private JLabel messageLabel;
+    private JLabel existingNameLabel;
+    private JLabel existingPriceLabel;
+    private JLabel existingQuantityLabel;
 
     private ArrayList <Product> productList;
 
@@ -54,9 +57,9 @@ public class CreateProductForm {
                 // Gets the chosen index
                 int index = existingProductsList.getSelectedIndex();
                 // Sets the labels to display the chosen product information
-                nameField.setText(productList.get(index).getName());
-                priceField.setText(Integer.toString(productList.get(index).getPrice()));
-                quantityField.setText(Integer.toString(productList.get(index).getQuantity()));
+                existingNameLabel.setText(productList.get(index).getName());
+                existingPriceLabel.setText(Integer.toString(productList.get(index).getPrice()));
+                existingQuantityLabel.setText(Integer.toString(productList.get(index).getQuantity()));
             }
         });
 
@@ -70,13 +73,23 @@ public class CreateProductForm {
                     try {
                         productPrice = Integer.parseInt(priceField.getText());
                         productQuantity = Integer.parseInt(quantityField.getText());
+
+                        if(productPrice > 0 && productQuantity > 0) {
+                            productHandler.addProduct(productName, productPrice, productQuantity);
+                            messageLabel.setText("Product successfully added");
+                            refreshJList();
+                            productHandler.saveProductFile();
+                            nameField.setText("");
+                            priceField.setText("");
+                            quantityField.setText("");
+                        }
+                        else {
+                            messageLabel.setText("Please have a price and/or quantity above 0 ");
+                        }
                     } catch (Exception ex) {
                         messageLabel.setText("Please write a number for price and/or quantity");
                     }
-                    productHandler.addProduct(productName, productPrice, productQuantity);
-                    messageLabel.setText("Product successfully added");
-                    refreshJList();
-                    productHandler.saveProductFile();
+
                 } else {
                     messageLabel.setText("Please update all fields");
                 }
