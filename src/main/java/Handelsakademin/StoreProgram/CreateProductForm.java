@@ -25,6 +25,7 @@ public class CreateProductForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(createProductPanel);
+        jFrame.pack();
 
         createProductButton.addActionListener(new ActionListener() {
             @Override

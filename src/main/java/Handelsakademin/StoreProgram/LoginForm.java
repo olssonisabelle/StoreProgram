@@ -29,6 +29,7 @@ public class LoginForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(loginPanel);
+        jFrame.pack();
         //A list of all users
         ArrayList<User> userList = userHandler.getAllUsers();
         loginButton.addActionListener(new ActionListener() {

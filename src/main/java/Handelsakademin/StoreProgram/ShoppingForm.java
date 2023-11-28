@@ -39,6 +39,7 @@ public class ShoppingForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(shoppingPanel);
         productJList.setModel(defaultListModel);
+        jFrame.pack();
 
         // Reads the productFile and updates productList
         productHandler.readProductFile();
@@ -62,7 +63,6 @@ public class ShoppingForm {
                 quantityField.setText("");
             }
         });
-
         logOutButton.addActionListener(new ActionListener() {
             //logOutButton to get back to loginForm
             @Override
