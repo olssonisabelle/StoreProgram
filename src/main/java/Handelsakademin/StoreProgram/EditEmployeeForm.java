@@ -75,7 +75,7 @@ public class EditEmployeeForm {
                     }
                 }
                 else {
-                    messageLabel.setText("Salary must be a number");
+                    messageLabel.setText("Salary must be a positive number");
                 }
             }
         });

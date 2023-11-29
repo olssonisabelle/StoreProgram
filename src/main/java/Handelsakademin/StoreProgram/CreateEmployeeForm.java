@@ -64,12 +64,13 @@ public class CreateEmployeeForm {
                         emailField.setText("");
                         salaryField.setText("");
                         passwordField.setText("");
-                    } else {
+                    }
+                    else {
                         messageLabel.setText("Not enough information provided for creating a new employee");
                     }
                 }
                 else {
-                    messageLabel.setText("Please write a number for salary");
+                    messageLabel.setText("Please write a positive number for salary");
                 }
             }
         });

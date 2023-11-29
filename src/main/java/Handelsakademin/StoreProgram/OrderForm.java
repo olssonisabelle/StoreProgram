@@ -48,32 +48,49 @@ public class OrderForm {
         placeOrderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                orderHandler = new OrderHandler();
-                //  WHAT HAPPENED HERE?
-                orderHandler.readOrderList();
-                // Adds the new order to the orderList in orderHandler
-                orderHandler.addNewOrder(order);
-                // Updates the orderFile to include the new order
-                orderHandler.saveOrderList();
-                //Update available products
-                productList.clear();
-                productList.addAll(checkProductsQuantityList);
-                productHandler.saveProductFile();
-                // Displays a message to the user
-                messageLabel.setText("Order successfully added.");
-                shoppingForm.resetOrder();
-                // TODO FIX AVAILABLE QUANTITY MANAGEMENT
+                if(!order.getProductList().isEmpty()) {
+                    orderHandler = new OrderHandler();
+                    //  WHAT HAPPENED HERE?
+                    orderHandler.readOrderList();
+                    // Adds the new order to the orderList in orderHandler
+                    orderHandler.addNewOrder(order);
+                    // Updates the orderFile to include the new order
+                    orderHandler.saveOrderList();
+                    //Update available products
+                    productList.clear();
+                    productList.addAll(checkProductsQuantityList);
+                    productHandler.saveProductFile();
+                    // Displays a message to the user
+                    messageLabel.setText("Order successfully added.");
+                    // Reset order so that customer can place a new one
+                    shoppingForm.resetOrder();
+                    order = shoppingForm.getOrder();
+                    // Empties JList
+                    productCartJList.clearSelection();
+                    defaultListModel.removeAllElements();
+                    //Empties information about products and total price
+                    productNameLabel.setText("");
+                    priceLabel.setText("");
+                    quantityLabel.setText("");
+                    totalPriceLabel.setText("0");
+                }
+                else {
+                    totalPriceLabel.setText("0");
+                    messageLabel.setText("There are no products in your cart");
+                }
             }
         });
 
         productCartJList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int index = productCartJList.getSelectedIndex();
-                // Sets the labels to the selected products information
-                productNameLabel.setText(order.getProductList().get(index).getName());
-                priceLabel.setText(Integer.toString(order.getProductList().get(index).getPrice()));
-                quantityLabel.setText(Integer.toString(order.getProductList().get(index).getQuantity()));
+                if(productCartJList.getSelectedIndex()!= -1) {
+                    int index = productCartJList.getSelectedIndex();
+                    // Sets the labels to the selected products information
+                    productNameLabel.setText(order.getProductList().get(index).getName());
+                    priceLabel.setText(Integer.toString(order.getProductList().get(index).getPrice()));
+                    quantityLabel.setText(Integer.toString(order.getProductList().get(index).getQuantity()));
+                }
             }
         });
     }
@@ -111,7 +128,4 @@ public class OrderForm {
         customerNameLabel.setText(shoppingForm.getLoginForm().getLogedInUser().getFirstName() + " " + shoppingForm.getLoginForm().getLogedInUser().getLastName());
     }
 
-    public OrderHandler getOrderHandler(){
-        return orderHandler;
-    }
 }

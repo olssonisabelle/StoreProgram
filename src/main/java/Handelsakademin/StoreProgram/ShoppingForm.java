@@ -94,7 +94,7 @@ public class ShoppingForm {
                             int availableQuantity = Integer.parseInt(availableQuantityLabel.getText());
                             Product product = new Product(productList.get(index).getId(), productList.get(index).getName(), productList.get(index).getPrice());
                             // Checks to see if there is enough products to place that order
-                            if (requiredQuantity <= availableQuantity) {
+                            if (requiredQuantity <= availableQuantity && requiredQuantity > 0) {
                                 product.setQuantity(requiredQuantity);
                                 order.addProductToOrder(product);
                                 //Update available quantity for product
@@ -105,8 +105,9 @@ public class ShoppingForm {
                                 //Reset quantity field
                                 quantityField.setText("");
 
-                            } else {
-                                messageLabel.setText("Not enough products available");
+                            }
+                            else {
+                                messageLabel.setText("Quantity not acceptable");
                             }
                         }
                         else{
