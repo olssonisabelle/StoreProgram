@@ -27,7 +27,7 @@ public class ShoppingForm {
     private ProductHandler productHandler = new ProductHandler();
     private ArrayList <Product> productList;
     private Customer loggedInCustomer;
-
+    private ArrayList<Product> checkProductsQuantityList;
     private Order order;
 
 
@@ -59,7 +59,7 @@ public class ShoppingForm {
                 // Sets the labels to display the chosen product information
                 productNameLabel.setText(productList.get(index).getName());
                 priceLabel.setText(Integer.toString(productList.get(index).getPrice()));
-                availableQuantityLabel.setText(Integer.toString(productList.get(index).getQuantity()));
+                availableQuantityLabel.setText(Integer.toString(checkProductsQuantityList.get(index).getQuantity()));
                 quantityField.setText("");
             }
         });
@@ -97,7 +97,12 @@ public class ShoppingForm {
                             if (requiredQuantity <= availableQuantity) {
                                 product.setQuantity(requiredQuantity);
                                 order.addProductToOrder(product);
+                                //Update available quantity for product
+                                checkProductsQuantityList.get(index).setQuantity(availableQuantity-requiredQuantity);
+                                availableQuantityLabel.setText(Integer.toString(checkProductsQuantityList.get(index).getQuantity()));
+                                //Update user
                                 messageLabel.setText("Product successfully added to cart");
+                                //Reset quantity field
                                 quantityField.setText("");
 
                             } else {
@@ -147,6 +152,12 @@ public class ShoppingForm {
         this.loginForm = loginForm;
         loggedInCustomer = (Customer) loginForm.getLogedInUser();
         resetOrder();
+        copyProductList();
+    }
+
+    public void copyProductList(){
+        checkProductsQuantityList = new ArrayList<>();
+        checkProductsQuantityList.addAll(productList);
     }
 
     public void setVisibility(boolean isVisible){
@@ -159,5 +170,11 @@ public class ShoppingForm {
     //Fill in userNameLabel with the logged-in users full name
     public void setUserNameLable(){
         userNameLable.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
+    }
+    public ArrayList<Product> getCheckProductsQuantityList(){
+        return checkProductsQuantityList;
+    }
+    public ProductHandler getProductHandler(){
+        return productHandler;
     }
 }

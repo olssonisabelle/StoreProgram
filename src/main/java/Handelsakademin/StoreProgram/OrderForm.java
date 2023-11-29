@@ -21,10 +21,11 @@ public class OrderForm {
     private JFrame jFrame;
     private ShoppingForm shoppingForm;
     private Customer logedinUser;
-    private ArrayList<Product> products;
+    private ArrayList<Product> productList;
+    private ArrayList<Product> checkProductsQuantityList;
+    private ProductHandler productHandler;
     private DefaultListModel defaultListModel = new DefaultListModel<>();
     private OrderHandler orderHandler;
-
     private Order order;
 
     public OrderForm() {
@@ -54,6 +55,10 @@ public class OrderForm {
                 orderHandler.addNewOrder(order);
                 // Updates the orderFile to include the new order
                 orderHandler.saveOrderList();
+                //Update available products
+                productList.clear();
+                productList.addAll(checkProductsQuantityList);
+                productHandler.saveProductFile();
                 // Displays a message to the user
                 messageLabel.setText("Order successfully added.");
                 shoppingForm.resetOrder();
@@ -82,6 +87,9 @@ public class OrderForm {
     }
     public void setShoppingForm(ShoppingForm shoppingForm){
         this.shoppingForm = shoppingForm;
+        checkProductsQuantityList = shoppingForm.getCheckProductsQuantityList();
+        productHandler = shoppingForm.getProductHandler();
+        productList = productHandler.getProductList();
         //Get order
         order = shoppingForm.getOrder();
         logedinUser = (Customer) shoppingForm.getLoginForm().getLogedInUser();
