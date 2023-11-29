@@ -46,26 +46,31 @@ public class CreateEmployeeForm {
                     messageLabel.setText("Please write a number for salary");
                 }
                 String password = passwordField.getText();
-                //Check if all fields are filled in to create a new employee
-                if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && salary > 0 && !password.isEmpty()) {
-                    Employee newEmployee = new Employee(firstName, lastName, email, salary, password);
-                    //Add employee to userList
-                    employeeForm.getLoginForm().getUserHandler().addNewEmployee(newEmployee);
-                    //Save userList to file
-                    employeeForm.getLoginForm().getUserHandler().saveUserFile();
-                    //Update user message
-                    messageLabel.setText("Successfully added new employee " + firstName + ".");
-                    //Reset textFields
-                    firstNameField.setText("");
-                    lastNameField.setText("");
-                    emailField.setText("");
-                    salaryField.setText("");
-                    passwordField.setText("");
+                if(salary > 0) {
+                    //Check if all fields are filled in to create a new employee
+                    if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                        Employee newEmployee = new Employee(firstName, lastName, email, salary, password);
+                        //Add employee to userList
+                        employeeForm.getLoginForm().getUserHandler().addNewEmployee(newEmployee);
+                        //Save userList to file
+                        employeeForm.getLoginForm().getUserHandler().saveUserFile();
+                        //Update user message
+                        messageLabel.setText("Successfully added new employee " + firstName + ".");
+                        //Refresh list
+                        refreshList();
+                        //Reset textFields
+                        firstNameField.setText("");
+                        lastNameField.setText("");
+                        emailField.setText("");
+                        salaryField.setText("");
+                        passwordField.setText("");
+                    } else {
+                        messageLabel.setText("Not enough information provided for creating a new employee");
+                    }
                 }
-                else{
-                    messageLabel.setText("Not enough information provided for creating a new employee");
+                else {
+                    messageLabel.setText("Please write a number for salary");
                 }
-                refreshList();
             }
         });
         goBackButton.addActionListener(new ActionListener() {

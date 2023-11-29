@@ -77,6 +77,7 @@ public class ShoppingForm {
                 EditCustomerForm editCustomerForm = new EditCustomerForm();
                 editCustomerForm.setCustomerInformation(shoppingForm);
                 jFrame.setVisible(false);
+                messageLabel.setText("");
             }
         });
 
@@ -123,6 +124,7 @@ public class ShoppingForm {
                 orderForm.setShoppingForm(shoppingForm);
                 orderForm.setUserNameLabel();
                 jFrame.setVisible(false);
+                messageLabel.setText("");
             }
         });
 

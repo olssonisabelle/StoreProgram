@@ -77,6 +77,7 @@ public class LoginForm {
             public void actionPerformed(ActionEvent e) {
                 CreateCustomerForm createCustomerForm = new CreateCustomerForm();
                 createCustomerForm.setLoginForm(loginForm);
+                messageLabel.setText("");
             }
         });
     }

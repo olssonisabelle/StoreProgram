@@ -15,8 +15,9 @@ public class OrderForm {
     private JButton goBackButton;
     private JLabel messageLabel;
     private JLabel productNameLabel;
-    private JTextField quantityField;
     private JLabel priceLabel;
+    private JLabel quantityLabel;
+    private JLabel totalPriceLabel;
     private JFrame jFrame;
     private ShoppingForm shoppingForm;
     private Customer logedinUser;
@@ -67,7 +68,7 @@ public class OrderForm {
                 // Sets the labels to the selected products information
                 productNameLabel.setText(order.getProductList().get(index).getName());
                 priceLabel.setText(Integer.toString(order.getProductList().get(index).getPrice()));
-                quantityField.setText(Integer.toString(order.getProductList().get(index).getQuantity()));
+                quantityLabel.setText(Integer.toString(order.getProductList().get(index).getQuantity()));
             }
         });
     }
@@ -86,6 +87,16 @@ public class OrderForm {
         logedinUser = (Customer) shoppingForm.getLoginForm().getLogedInUser();
         // Updates the JList to display the current order
         refreshJList();
+        //Set total price
+        totalPriceLabel.setText(calcTotalPrice() + " kr");
+    }
+
+    private int calcTotalPrice(){
+        int totalPrice = 0;
+        for(Product product: order.getProductList()){
+            totalPrice += product.getPrice() * product.getQuantity();
+        }
+        return totalPrice;
     }
 
     public void setUserNameLabel(){

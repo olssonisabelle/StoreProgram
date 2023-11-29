@@ -54,20 +54,28 @@ public class EditEmployeeForm {
                 catch(Exception ex){
                     messageLabel.setText("Salary must be a number");
                 }
-                // Changes logged in employees information
-                if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && salary > 0){
-                    currentUser.setFirstName(firstName);
-                    currentUser.setLastName(lastName);
-                    currentUser.setEmail(email);
-                    currentUser.setPassword(password);
-                    currentUser.setSalary(salary);
-                    employeeForm.getLoginForm().getUserHandler().changeEmployee((Employee) currentUser);
-                    // Inform user that changes has been implemented
-                    messageLabel.setText("Employee information has been changed");
-                    employeeNameLabel.setText(firstName + " " + lastName);
-                    // Saves the changes in the file
-                    employeeForm.getLoginForm().getUserHandler().saveUserFile();
+                if(salary > 0) {
+                    // Changes logged in employees information
+                    if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                        currentUser.setFirstName(firstName);
+                        currentUser.setLastName(lastName);
+                        currentUser.setEmail(email);
+                        currentUser.setPassword(password);
+                        currentUser.setSalary(salary);
+                        employeeForm.getLoginForm().getUserHandler().changeEmployee((Employee) currentUser);
+                        // Inform user that changes has been implemented
+                        messageLabel.setText("Employee information has been changed");
+                        employeeNameLabel.setText(firstName + " " + lastName);
+                        // Saves the changes in the file
+                        employeeForm.getLoginForm().getUserHandler().saveUserFile();
 
+                    } else {
+                        // Inform user that changes has not been implemented
+                        messageLabel.setText("Missing information to save changes");
+                    }
+                }
+                else {
+                    messageLabel.setText("Salary must be a number");
                 }
             }
         });

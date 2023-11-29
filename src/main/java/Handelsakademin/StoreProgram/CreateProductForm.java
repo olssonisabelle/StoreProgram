@@ -18,16 +18,9 @@ public class CreateProductForm {
     private JButton goBackButton;
     private JList existingProductsList;
     private JLabel messageLabel;
-    private JLabel existingNameLabel;
-    private JLabel existingPriceLabel;
-    private JLabel existingQuantityLabel;
-
     private ArrayList <Product> productList;
-
     private EmployeeForm employeeForm;
-
     private DefaultListModel defaultListModel = new DefaultListModel<>();
-
     private ProductHandler productHandler;
 
 
@@ -40,28 +33,6 @@ public class CreateProductForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(createProductPanel);
         existingProductsList.setModel(defaultListModel);
-        ProductHandler productHandler = new ProductHandler();
-
-        productHandler.readProductFile();
-        productList = productHandler.getProductList();
-        // Adds all product to the JList
-        for(Product product: productList){
-            defaultListModel.addElement(product.getName());
-        }
-
-        existingProductsList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                // Clears the messageLabel
-                messageLabel.setText("");
-                // Gets the chosen index
-                int index = existingProductsList.getSelectedIndex();
-                // Sets the labels to display the chosen product information
-                existingNameLabel.setText(productList.get(index).getName());
-                existingPriceLabel.setText(Integer.toString(productList.get(index).getPrice()));
-                existingQuantityLabel.setText(Integer.toString(productList.get(index).getQuantity()));
-            }
-        });
 
         createProductButton.addActionListener(new ActionListener() {
             @Override
@@ -77,8 +48,9 @@ public class CreateProductForm {
                         if(productPrice > 0 && productQuantity > 0) {
                             productHandler.addProduct(productName, productPrice, productQuantity);
                             messageLabel.setText("Product successfully added");
-                            refreshJList();
                             productHandler.saveProductFile();
+                            refreshJList();
+                            //Reset labels
                             nameField.setText("");
                             priceField.setText("");
                             quantityField.setText("");
@@ -106,12 +78,16 @@ public class CreateProductForm {
     }
     public void setEmployeeForm(EmployeeForm employeeForm) {
         this.employeeForm = employeeForm;
+        productHandler = new ProductHandler();
+        productHandler.readProductFile();
+        productList = productHandler.getProductList();
+        refreshJList();
     }
-private void refreshJList() {
-    defaultListModel.removeAllElements();
-    // Adds all product to the JList
-    for(Product product: productList) {
-        defaultListModel.addElement(product.getName());
-    }
+    private void refreshJList() {
+        defaultListModel.removeAllElements();
+        // Adds all product to the JList
+        for(Product product: productList) {
+            defaultListModel.addElement(product.getName() + ", Price: " + product.getPrice());
+        }
     }
 }

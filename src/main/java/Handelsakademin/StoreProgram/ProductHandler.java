@@ -25,6 +25,9 @@ public class ProductHandler {
 
     public void readProductFile(){
         if(productFile.exists()) {
+            //Reset list before reading product from file
+            productList.clear();
+            //Read file to add products to productList
             try {
                 FileReader fr = new FileReader(productFile);
                 BufferedReader br = new BufferedReader(fr);

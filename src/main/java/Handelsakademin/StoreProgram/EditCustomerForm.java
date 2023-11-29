@@ -60,21 +60,29 @@ public class EditCustomerForm {
                 String city = cityField.getText();
 
                 // Changes logged in employees information
-                if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !streetName.isEmpty() && zipCode > 0 && !city.isEmpty()){
-                    currentUser.setFirstName(firstName);
-                    currentUser.setLastName(lastName);
-                    currentUser.setEmail(email);
-                    currentUser.setPassword(password);
-                    currentUser.setStreetName(streetName);
-                    currentUser.setZipCode(zipCode);
-                    currentUser.setCity(city);
-                    shoppingForm.getLoginForm().getUserHandler().changeCustomer((Customer) currentUser);
-                    // Inform user that changes has been implemented
-                    messageLabel.setText("Customer information has been changed");
-                    customerNameLabel.setText(firstName + " " + lastName);
-                    // Saves the changes in the file
-                    shoppingForm.getLoginForm().getUserHandler().saveUserFile();
+                if(zipCode > 0) {
+                    if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !streetName.isEmpty() && !city.isEmpty()) {
+                        currentUser.setFirstName(firstName);
+                        currentUser.setLastName(lastName);
+                        currentUser.setEmail(email);
+                        currentUser.setPassword(password);
+                        currentUser.setStreetName(streetName);
+                        currentUser.setZipCode(zipCode);
+                        currentUser.setCity(city);
+                        shoppingForm.getLoginForm().getUserHandler().changeCustomer((Customer) currentUser);
+                        // Inform user that changes has been implemented
+                        messageLabel.setText("Customer information has been changed");
+                        customerNameLabel.setText(firstName + " " + lastName);
+                        // Saves the changes in the file
+                        shoppingForm.getLoginForm().getUserHandler().saveUserFile();
 
+                    } else {
+                        // Inform user that changes has not been implemented
+                        messageLabel.setText("Missing information to save changes");
+                    }
+                }
+                else{
+                    messageLabel.setText("Zip code must be a number");
                 }
             }
         });
