@@ -54,6 +54,7 @@ public class OrderHandler {
             int price;
             int quantity;
             ArrayList<Product> productList = new ArrayList<>();
+            String status;
             while (line != null) {
                 //Divide into order variables
                 tempArr = line.split(delimiterOrder);
@@ -106,7 +107,8 @@ public class OrderHandler {
                     for(Product product: productList){
                         tempProductList.add(product);
                     }
-                    Order order = new Order(idOrder, tempProductList, customer);
+                    status = tempArr[3];
+                    Order order = new Order(idOrder, tempProductList, customer, status);
                     //Add to list
                     orderList.add(order);
                 }
