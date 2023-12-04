@@ -19,6 +19,17 @@ public class OrderHandler {
         return orderList;
     }
 
+    public ArrayList<Order> getOrderListByCustomer(int id){
+        ArrayList <Order> specificOrderList = new ArrayList<>();
+        //Looks through the orderList and adds all the orders with a specific customer's id
+        for(Order order: orderList){
+            if(order.getCustomerId() == id){
+                specificOrderList.add(order);
+            }
+        }
+        return specificOrderList;
+    }
+
     public void readOrderList(){
         orderList.clear();
         try {

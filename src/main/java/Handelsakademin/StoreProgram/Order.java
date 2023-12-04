@@ -68,4 +68,8 @@ public class Order {
         String str = getProductListCSV("/");
         return id + "," + str + "," + customer.getId();
     }
+
+    public int getCustomerId(){
+        return customer.getId();
+    }
 }

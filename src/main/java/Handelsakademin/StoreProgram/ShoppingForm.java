@@ -20,6 +20,7 @@ public class ShoppingForm {
     private JLabel productNameLabel;
     private JLabel availableQuantityLabel;
     private JLabel messageLabel;
+    private JButton goToHistoryButton;
     private JFrame jFrame;
     private LoginForm loginForm;
     private ShoppingForm shoppingForm = this;
@@ -129,12 +130,21 @@ public class ShoppingForm {
                 OrderForm orderForm = new OrderForm();
                 orderForm.setShoppingForm(shoppingForm);
                 orderForm.setUserNameLabel();
-                jFrame.setVisible(false);
+                setVisibility(false);
                 messageLabel.setText("");
             }
         });
 
 
+        goToHistoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OrderHistoryForm orderHistoryForm = new OrderHistoryForm();
+                orderHistoryForm.setShoppingForm(shoppingForm);
+                setVisibility(false);
+                messageLabel.setText("");
+            }
+        });
     }
 
     public Order getOrder(){
