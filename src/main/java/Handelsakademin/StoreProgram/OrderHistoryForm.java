@@ -106,7 +106,7 @@ public class OrderHistoryForm {
         }
         //Changes the totalPriceLabel
         totalPriceLabel.setText(Integer.toString(totalPrice));
-        
+
         // Displays the current status of the selected order
         statusLabel.setText(orderList.get(index).getStatus().toLowerCase());
     }
