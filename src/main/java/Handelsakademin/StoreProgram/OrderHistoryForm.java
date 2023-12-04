@@ -16,6 +16,7 @@ public class OrderHistoryForm {
     private JLabel orderIdLabel;
     private JList productJList;
     private JLabel totalPriceLabel;
+    private JLabel statusLabel;
     private ShoppingForm shoppingForm;
     ArrayList <Order> orderList;
     private DefaultListModel orderDefaultListModel = new DefaultListModel<>();
@@ -105,7 +106,9 @@ public class OrderHistoryForm {
         }
         //Changes the totalPriceLabel
         totalPriceLabel.setText(Integer.toString(totalPrice));
-
+        
+        // Displays the current status of the selected order
+        statusLabel.setText(orderList.get(index).getStatus().toLowerCase());
     }
 
 
