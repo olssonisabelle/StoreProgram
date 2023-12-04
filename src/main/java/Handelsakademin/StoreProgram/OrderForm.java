@@ -16,8 +16,10 @@ public class OrderForm {
     private JLabel messageLabel;
     private JLabel productNameLabel;
     private JLabel priceLabel;
-    private JLabel quantityLabel;
     private JLabel totalPriceLabel;
+    private JTextField quantityField;
+    private JButton saveChangesButton;
+    private JButton removeItemButton;
     private JFrame jFrame;
     private ShoppingForm shoppingForm;
     private Customer logedinUser;
@@ -71,7 +73,7 @@ public class OrderForm {
                     //Empties information about products and total price
                     productNameLabel.setText("");
                     priceLabel.setText("");
-                    quantityLabel.setText("");
+                    quantityField.setText("");
                     totalPriceLabel.setText("0");
                 }
                 else {
@@ -89,7 +91,53 @@ public class OrderForm {
                     // Sets the labels to the selected products information
                     productNameLabel.setText(order.getProductList().get(index).getName());
                     priceLabel.setText(Integer.toString(order.getProductList().get(index).getPrice()));
-                    quantityLabel.setText(Integer.toString(order.getProductList().get(index).getQuantity()));
+                    quantityField.setText(Integer.toString(order.getProductList().get(index).getQuantity()));
+                    removeItemButton.setEnabled(true);
+                }
+                else{
+                    removeItemButton.setEnabled(false);
+                }
+            }
+        });
+        saveChangesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(productCartJList.getSelectedIndex()!= -1) {
+                    try{
+                        //Get index from productCartJList
+                        int index = productCartJList.getSelectedIndex();
+                        //Get id of the selected product
+                        int getOrderProductId = order.getProductList().get(index).getId();
+                        //Save new quantity that user inputted
+                        int newQuantity = Integer.parseInt(quantityField.getText());
+                        //Save the selected products index from the productList
+                        int productListIndex = getProductListIndex(getOrderProductId);
+                        //Calculate the available quantity of the selected product
+                        int availableQuantity = productList.get(productListIndex).getQuantity() + order.getProductList().get(index).getQuantity();
+                        //If statement to check that the inputted quantity is a valid input
+                        if(newQuantity > 0 && newQuantity <= availableQuantity) {
+                            //Update to new quantity in orderProductList
+                            order.getProductList().get(index).setQuantity(newQuantity);
+                            //Reset to storage quantity
+                            productList.get(productListIndex).setQuantity(availableQuantity);
+                            //Update quantity to what is remaining
+                            productList.get(productListIndex).setQuantity(availableQuantity-newQuantity);
+                            //Update user
+                            messageLabel.setText("Quantity is now updated");
+                        }
+                        else {
+                            //Update user
+                            messageLabel.setText("Unavailable quantity");
+                        }
+                    }
+                    catch (Exception ex){
+                        //Update user
+                        messageLabel.setText("Quantity has to be a number");
+                    }
+                }
+                else {
+                    //Update user
+                    messageLabel.setText("No item in cart is selected");
                 }
             }
         });
@@ -126,6 +174,14 @@ public class OrderForm {
 
     public void setUserNameLabel(){
         customerNameLabel.setText(shoppingForm.getLoginForm().getLogedInUser().getFirstName() + " " + shoppingForm.getLoginForm().getLogedInUser().getLastName());
+    }
+    private int getProductListIndex(int getOrderProductId){
+        for(int i = 0; i < productList.size(); i++){
+            if(productList.get(i).getId() == getOrderProductId){
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

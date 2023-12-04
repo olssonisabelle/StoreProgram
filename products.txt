@@ -1,8 +1,8 @@
-1,T-shirt,150,56
-2,Pants,200,0
-3,Jacket,700,0
-4,Skirt,250,19
-5,Shoe,350,0
+1,T-shirt,150,96
+2,Pants,200,10
+3,Jacket,700,20
+4,Skirt,250,15
+5,Shoe,350,30
 6,Box,10,127
-7,Pen,15,895
-8,Notebook,50,135
+7,Pen,15,795
+8,Notebook,50,85

@@ -158,7 +158,9 @@ public class ShoppingForm {
 
     public void copyProductList(){
         checkProductsQuantityList = new ArrayList<>();
-        checkProductsQuantityList.addAll(productList);
+        for(Product product: productList) {
+            checkProductsQuantityList.add(product);
+        }
     }
 
     public void setVisibility(boolean isVisible){
