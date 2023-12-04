@@ -92,9 +92,11 @@ public class OrderForm {
                     productNameLabel.setText(order.getProductList().get(index).getName());
                     priceLabel.setText(Integer.toString(order.getProductList().get(index).getPrice()));
                     quantityField.setText(Integer.toString(order.getProductList().get(index).getQuantity()));
+                    //Enable button if product is selected
                     removeItemButton.setEnabled(true);
                 }
                 else{
+                    //Disables button if no product is selected
                     removeItemButton.setEnabled(false);
                 }
             }
@@ -114,6 +116,7 @@ public class OrderForm {
                         int productListIndex = getProductListIndex(getOrderProductId);
                         //Calculate the available quantity of the selected product
                         int availableQuantity = productList.get(productListIndex).getQuantity() + order.getProductList().get(index).getQuantity();
+
                         //If statement to check that the inputted quantity is a valid input
                         if(newQuantity > 0 && newQuantity <= availableQuantity) {
                             //Update to new quantity in orderProductList
@@ -141,6 +144,32 @@ public class OrderForm {
                 }
             }
         });
+
+        removeItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(productCartJList.getSelectedIndex()!= -1) {
+                    int index = productCartJList.getSelectedIndex();
+                    //Get id of the selected product
+                    int getOrderProductId = order.getProductList().get(index).getId();
+                    //Save the selected products index from the productList
+                    int productListIndex = getProductListIndex(getOrderProductId);
+                    //Calculate the available quantity of the selected product
+                    int availableQuantity = productList.get(productListIndex).getQuantity() + order.getProductList().get(index).getQuantity();
+                    //Reset to storage quantity
+                    productList.get(productListIndex).setQuantity(availableQuantity);
+                    //Removes the selected item from order
+                    order.getProductList().remove(index);
+                    // Update user
+                    messageLabel.setText("Item is removed");
+                    //Update JList of products in order
+                    refreshJList();
+                }
+                else{
+                    messageLabel.setText("No item in cart is selected");
+                }
+            }
+        });
     }
 
     private void refreshJList(){
@@ -162,6 +191,8 @@ public class OrderForm {
         refreshJList();
         //Set total price
         totalPriceLabel.setText(calcTotalPrice() + " kr");
+        //Disables button for removing products
+        removeItemButton.setEnabled(false);
     }
 
     private int calcTotalPrice(){
