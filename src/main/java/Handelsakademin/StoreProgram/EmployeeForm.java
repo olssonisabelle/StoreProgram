@@ -13,6 +13,7 @@ public class EmployeeForm {
     private JButton logOutButton;
     private JButton goToChangeProfileButton;
     private JButton goToInventoryButton;
+    private JButton editProductButton;
     private JFrame jFrame;
     private LoginForm loginForm;
     private EmployeeForm employeeForm = this;
@@ -73,30 +74,38 @@ public class EmployeeForm {
                 jFrame.setVisible(false);
             }
         });
-    }
+        editProductButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditProductForm editProductForm = new EditProductForm();
+                editProductForm.setEmployeeForm(employeeForm);
+                jFrame.setVisible(false);
+            }
+        });
 
+    }
+        public EmployeeForm getEmployeeForm () {
+            return this;
+        }
 
-    public EmployeeForm getEmployeeForm(){
-        return this;
-    }
-    public void setVisibility(boolean isVisible){
-        jFrame.setVisible(isVisible);
-    }
+        public void setVisibility ( boolean isVisible){
+            jFrame.setVisible(isVisible);
+        }
 
-    public void setLoginForm(LoginForm loginForm){
-        this.loginForm = loginForm;
-    }
+        public void setLoginForm (LoginForm loginForm){
+            this.loginForm = loginForm;
+        }
 
-    public LoginForm getLoginForm(){
-        return loginForm;
-    }
+        public LoginForm getLoginForm () {
+            return loginForm;
+        }
 
-    //Fill in userNameLabel with the logged-in users full name
-    public void setUserNameLable(){
-        employeeNameLabel.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
-    }
+        //Fill in userNameLabel with the logged-in users full name
+        public void setUserNameLable () {
+            employeeNameLabel.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
+        }
 
-    public void setProductHandler(ProductHandler productHandler) {
-        this.productHandler = productHandler;
+        public void setProductHandler (ProductHandler productHandler){
+            this.productHandler = productHandler;
+        }
     }
-}

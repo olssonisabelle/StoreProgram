@@ -13,18 +13,32 @@ public class ProductHandler {
     public ProductHandler() {
     }
 
+    public void saveProductChanges(int id, String name, int price, int quantity) {
+        // Searches for the id to be changed
+        for(int i = 0; i < productList.size(); i++){
+            // If the chosen id matches an id in the list the changes are made
+            if( id == productList.get(i).getId()){
+                productList.get(i).setName(name);
+                productList.get(i).setPrice(price);
+                productList.get(i).setQuantity(quantity);
+                break;
+            }
+        }
+
+    }
+
     public void addProduct(String name, int price, int quantity) {
 
         Product product = new Product(name, price, quantity);
         productList.add(product);
     }
 
-    public ArrayList <Product> getProductList(){
+    public ArrayList<Product> getProductList() {
         return productList;
     }
 
-    public void readProductFile(){
-        if(productFile.exists()) {
+    public void readProductFile() {
+        if (productFile.exists()) {
             //Reset list before reading product from file
             productList.clear();
             //Read file to add products to productList
@@ -56,8 +70,7 @@ public class ProductHandler {
             } catch (Exception e) {
                 System.out.println("Error, something went wrong.");
             }
-        }
-        else if(!productFile.exists()){
+        } else if (!productFile.exists()) {
             //Hard coded test products
             productList.add(new Product("T-shirt", 150, 30));
             productList.add(new Product("Pants", 200, 5));
@@ -66,24 +79,21 @@ public class ProductHandler {
     }
 
 
-    public void saveProductFile(){
-        try{
+    public void saveProductFile() {
+        try {
             FileWriter fw = new FileWriter(productFile);
             BufferedWriter bw = new BufferedWriter(fw);
-            for(int i = 0; i < productList.size(); i++){
+            for (int i = 0; i < productList.size(); i++) {
                 //Write product to file
                 bw.write(productList.get(i).getCSV(","));
                 //So the file don't end with new line
-                if(i < productList.size() - 1){
+                if (i < productList.size() - 1) {
                     bw.newLine();
                 }
             }
             bw.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error, something went wrong.");
         }
     }
-
-
 }
