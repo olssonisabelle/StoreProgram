@@ -14,6 +14,7 @@ public class EmployeeForm {
     private JButton goToChangeProfileButton;
     private JButton goToInventoryButton;
     private JButton editProductButton;
+    private JButton soldProductsButton;
     private JFrame jFrame;
     private LoginForm loginForm;
     private EmployeeForm employeeForm = this;
@@ -83,6 +84,14 @@ public class EmployeeForm {
             }
         });
 
+        soldProductsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SoldProductsForm soldProductsForm = new SoldProductsForm();
+                soldProductsForm.setEmployeeForm(employeeForm);
+                jFrame.setVisible(false);
+            }
+        });
     }
         public EmployeeForm getEmployeeForm () {
             return this;
