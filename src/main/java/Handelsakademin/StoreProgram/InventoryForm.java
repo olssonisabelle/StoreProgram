@@ -18,6 +18,7 @@ public class InventoryForm {
     private JComboBox statusComboBox;
     private JButton changeStatusButton;
     private JLabel messageLabel;
+    private JButton sendTransportButton;
     private DefaultComboBoxModel<String> model;
     private JLabel statusField;
     private JFrame jFrame;
@@ -27,6 +28,7 @@ public class InventoryForm {
     private OrderHandler orderHandler = new OrderHandler();
     private ArrayList<Order> orders;
     private int orderIndex = -1;
+    private InventoryForm inventoryForm = this;
 
     public InventoryForm() {
         jFrame = new JFrame();
@@ -108,7 +110,17 @@ public class InventoryForm {
                 else{
                     messageLabel.setText("Failed to update status");
                 }
-
+            }
+        });
+        sendTransportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Go to transportForm
+                TransportForm transportForm = new TransportForm();
+                //Send information about inventoryForm to transportForm
+                transportForm.setInventoryForm(inventoryForm);
+                //Hide inventoryForm
+                jFrame.setVisible(false);
             }
         });
     }
@@ -147,6 +159,9 @@ public class InventoryForm {
     public void setUserNameLable(){
         employeeNameLabel.setText(employeeForm.getLoginForm().getLogedInUser().getFirstName() + " " + employeeForm.getLoginForm().getLogedInUser().getLastName());
     }
+    public EmployeeForm getEmployeeForm(){
+        return employeeForm;
+    }
 
     public void setCombobox(String status){
         // Updates the comboBox to match the chosen order's status
@@ -173,5 +188,8 @@ public class InventoryForm {
                 statusComboBox.setSelectedIndex(6);
                 break;
         }
+    }
+    public void setVisibility ( boolean isVisible){
+        jFrame.setVisible(isVisible);
     }
 }

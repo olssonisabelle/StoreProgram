@@ -13,9 +13,12 @@ public class SoldProductsForm {
     private EmployeeForm employeeForm;
     private JLabel soldProductsNameLabel;
     private JList soldProductsList;
-    private JPanel SoldProductsList;
     private JPanel soldProductsPanel;
     private JButton goBackButton;
+    private JList transportJList;
+    private TransportHandler transportHandler;
+    private ArrayList<Transport> transportList;
+    private DefaultListModel transportListModel = new DefaultListModel<>();
     private DefaultListModel listModel = new DefaultListModel<>();
     private OrderHandler orderHandler = new OrderHandler();
     private ArrayList<Order> orders;
@@ -29,6 +32,7 @@ public class SoldProductsForm {
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(soldProductsPanel);
         soldProductsList.setModel(listModel);
+        transportJList.setModel(transportListModel);
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,6 +49,21 @@ public class SoldProductsForm {
         this.employeeForm = employeeForm;
         setEmployeeNameLabel();
         setSoldProducts();
+        //Create transportHandler to use in refreshTransportJList
+        transportHandler = new TransportHandler();
+        //Refresh transportJList
+        refreshTransportJList();
+    }
+    private void refreshTransportJList(){
+        //First, remove all elements from the list.
+        transportListModel.removeAllElements();
+        //Get transportList from transportHandler class
+        transportHandler.readTransportList();
+        transportList = transportHandler.getTransportList();
+        //Add all transport to transportJList
+        for (Transport transport : transportList) {
+            transportListModel.addElement("Transport ID: " + transport.getID() + ", Driver: " + transport.getDriver() + " " + transport.getTransportOrdersText());
+        }
     }
 
     private void setSoldProducts() {

@@ -117,4 +117,7 @@ public class Order {
 
         }
     }
+    public String getCustomerAddress(){
+        return "City: " + customer.getCity() + ", Street: " + customer.getStreetName() + ", Zip code: " + customer.getZipCode();
+    }
 }

@@ -127,7 +127,7 @@ public class OrderHandler {
             FileWriter fw = new FileWriter(orderFile);
             BufferedWriter bw = new BufferedWriter(fw);
             for(int i = 0; i < orderList.size(); i++){
-                //Write user to file
+                //Write order to file
                 bw.write(orderList.get(i).getCSV());
                 //So the file don't end with new line
                 if(i < orderList.size() - 1){
