@@ -81,9 +81,15 @@ public class TransportForm {
                     }
                     else {
                         //If transport object fails to create reset orders status in list to packed
-                        for(Order order: transportArrayList){
-                            order.setStatus("PACKED");
+                        for (int i = 0; i < orders.size(); i++) {
+                            for(Order order: transportArrayList){
+                                if(order.getId() == orders.get(i).getId()){
+                                    orders.get(i).setStatus("PACKED");
+                                }
+                            }
                         }
+                        //Save updates in orderFile
+                        orderHandler.saveOrderList();
                         transportArrayList.clear();
                         //Refresh ordersReadyToShip
                         refreshOrderList();

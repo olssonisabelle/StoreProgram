@@ -36,7 +36,7 @@ public class Transport {
     //There is a 10% chance that transport will fail to ship
     public boolean sendTransport(){
         int send = (int)(Math.random()*100);
-        return send >= 10;
+        return false;//send >= 10;
     }
     //To create a CSV file to save data
     public String getCSV(){
