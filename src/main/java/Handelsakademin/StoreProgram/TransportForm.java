@@ -41,13 +41,16 @@ public class TransportForm {
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for(Order order: transportArrayList){
-                    order.setStatus("PACKED");
+                //If you go back to inventoryForm without creating a transport, change added orders status to packed
+                for (int i = 0; i < orders.size(); i++) {
+                    for(Order order: transportArrayList){
+                        if(order.getId() == orders.get(i).getId()){
+                            orders.get(i).setStatus("PACKED");
+                        }
+                    }
                 }
-                //Refresh ordersReadyToShip
-                refreshOrderList();
-                //Refresh list when order is added
-                refreshTransportList();
+                //Save updates in orderFile
+                orderHandler.saveOrderList();
                 inventoryForm.setVisibility(true);
                 jFrame.dispose();
             }
@@ -101,46 +104,50 @@ public class TransportForm {
         addOrderToTransportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int index = ordersReadyToShipList.getSelectedIndex();
-                //Add selected order from ordersReadyToShipList to transportOrderList
-                for (int i = 0; i < orders.size(); i++){
-                    if(packedOrders.get(index).getId() == orders.get(i).getId()){
-                        //Add order to transport list
-                        transportArrayList.add(orders.get(i));
-                        //Change status in order to ship
-                        orders.get(i).setStatus("SHIPPED");
-                        //Update file
-                        orderHandler.saveOrderList();
-                        break;
+                if (ordersReadyToShipList.getSelectedIndex() != -1) {
+                    int index = ordersReadyToShipList.getSelectedIndex();
+                    //Add selected order from ordersReadyToShipList to transportOrderList
+                    for (int i = 0; i < orders.size(); i++) {
+                        if (packedOrders.get(index).getId() == orders.get(i).getId()) {
+                            //Add order to transport list
+                            transportArrayList.add(orders.get(i));
+                            //Change status in order to ship
+                            orders.get(i).setStatus("SHIPPED");
+                            //Update file
+                            orderHandler.saveOrderList();
+                            break;
+                        }
                     }
+                    //Refresh ordersReadyToShip
+                    refreshOrderList();
+                    //Refresh list when order is added
+                    refreshTransportList();
                 }
-                //Refresh ordersReadyToShip
-                refreshOrderList();
-                //Refresh list when order is added
-                refreshTransportList();
             }
         });
         removeOrderFromTransportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Remove order from transport
-                int index = transportOrderList.getSelectedIndex();
-                //Add selected order from ordersReadyToShipList to transportOrderList
-                for (int i = 0; i < orders.size(); i++){
-                    if(transportArrayList.get(index).getId() == orders.get(i).getId()){
-                        //Remove order from transport list
-                        transportArrayList.remove(index);
-                        //Change status in order to packed
-                        orders.get(i).setStatus("PACKED");
-                        //Update file
-                        orderHandler.saveOrderList();
-                        break;
+                if (transportOrderList.getSelectedIndex() != -1) {
+                    //Remove order from transport
+                    int index = transportOrderList.getSelectedIndex();
+                    //Add selected order from ordersReadyToShipList to transportOrderList
+                    for (int i = 0; i < orders.size(); i++) {
+                        if (transportArrayList.get(index).getId() == orders.get(i).getId()) {
+                            //Remove order from transport list
+                            transportArrayList.remove(index);
+                            //Change status in order to packed
+                            orders.get(i).setStatus("PACKED");
+                            //Update file
+                            orderHandler.saveOrderList();
+                            break;
+                        }
                     }
+                    //Refresh ordersReadyToShip
+                    refreshOrderList();
+                    //Refresh list when order is added
+                    refreshTransportList();
                 }
-                //Refresh ordersReadyToShip
-                refreshOrderList();
-                //Refresh list when order is added
-                refreshTransportList();
             }
         });
     }
