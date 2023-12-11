@@ -4,3 +4,7 @@
 1,Per,Ek,perek,false,123,Gränd,5642,Stad
 2,Ulf,Bo,ulfbo,true,123,1234
 2,michaela,m,mm,false,123,mm,7777,City
+3,ddd,ddd,ddd,false,ddd,ddd,123,ddd
+4,Ludde,Hök,lhok,false,123,Väg,10523,Halmstad
+5,Milo,Ek,miloek,false,123,Väg,12,Halmstad
+6,mm,mm,mm,false,135,mm,15666,mm
