@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Represents a form displaying sold products, including information about employees and transportation.
- */
 public class SoldProductsForm {
     private JFrame jFrame;
     private EmployeeForm employeeForm;
@@ -26,9 +23,6 @@ public class SoldProductsForm {
     private OrderHandler orderHandler = new OrderHandler();
     private ArrayList<Order> orders;
 
-    /**
-     * Constructor to initialize the SoldProductsForm.
-     */
     public SoldProductsForm() {
         // Initialize JFrame and set properties
         jFrame = new JFrame();
@@ -54,18 +48,11 @@ public class SoldProductsForm {
         });
     }
 
-    /**
-     * Sets the employee name label on the form.
-     */
     public void setEmployeeNameLabel() {
         soldProductsNameLabel.setText(employeeForm.getLoginForm().getLogedInUser().getFirstName() + " " + employeeForm.getLoginForm().getLogedInUser().getLastName());
     }
 
-    /**
-     * Sets the employee form and initializes related data on the form.
-     *
-     * @param employeeForm The associated EmployeeForm.
-     */
+    //Initialize related data on the form
     public void setEmployeeForm(EmployeeForm employeeForm) {
         this.employeeForm = employeeForm;
         setEmployeeNameLabel();
@@ -76,9 +63,7 @@ public class SoldProductsForm {
         refreshTransportJList();
     }
 
-    /**
-     * Refreshes the transport JList by reading the transport list and updating the UI.
-     */
+    //Refreshes the transport JList by reading the transport list and updating the UI
     private void refreshTransportJList() {
         // First, remove all elements from the list.
         transportListModel.removeAllElements();
@@ -91,9 +76,7 @@ public class SoldProductsForm {
         }
     }
 
-    /**
-     * Sets the sold products on the form by reading order data and updating the UI.
-     */
+    //Sets the sold products on the form by reading order data and updating the UI.
     private void setSoldProducts() {
         orderHandler.readOrderList();
         orders = orderHandler.getOrderList();

@@ -20,7 +20,6 @@ public class InventoryForm {
     private JLabel messageLabel;
     private JButton sendTransportButton;
     private DefaultComboBoxModel<String> model;
-    private JLabel statusField;
     private JFrame jFrame;
     private EmployeeForm employeeForm;
     private DefaultListModel listModel = new DefaultListModel<>();

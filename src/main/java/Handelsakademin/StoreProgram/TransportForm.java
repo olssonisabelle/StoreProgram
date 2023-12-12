@@ -187,10 +187,6 @@ public class TransportForm {
             }
         }
     }
-    private ArrayList<Order> getOrdersToTransport(){
-        return transportArrayList;
-    }
-
     public void setUserNameLabel(){
         employeeNameLabel.setText(inventoryForm.getEmployeeForm().getLoginForm().getLogedInUser().getFirstName() + " " + inventoryForm.getEmployeeForm().getLoginForm().getLogedInUser().getLastName());
     }

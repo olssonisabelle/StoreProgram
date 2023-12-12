@@ -93,9 +93,6 @@ public class EmployeeForm {
             }
         });
     }
-        public EmployeeForm getEmployeeForm () {
-            return this;
-        }
 
         public void setVisibility ( boolean isVisible){
             jFrame.setVisible(isVisible);

@@ -52,7 +52,6 @@ public class OrderForm {
             public void actionPerformed(ActionEvent e) {
                 if(!order.getProductList().isEmpty()) {
                     orderHandler = new OrderHandler();
-                    //  WHAT HAPPENED HERE?
                     orderHandler.readOrderList();
                     // Adds the new order to the orderList in orderHandler
                     orderHandler.addNewOrder(order);
