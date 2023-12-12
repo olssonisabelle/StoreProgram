@@ -70,7 +70,7 @@
             <properties>
               <background color="-1146675"/>
               <font name="Forte" style="2"/>
-              <foreground color="-1537"/>
+              <foreground color="-13947600"/>
               <text value="Go back"/>
             </properties>
           </component>
@@ -109,7 +109,7 @@
             <properties>
               <background color="-1146675"/>
               <font name="Forte" style="2"/>
-              <foreground color="-1537"/>
+              <foreground color="-13947600"/>
               <text value="Send transport"/>
             </properties>
           </component>
@@ -225,7 +225,7 @@
             <properties>
               <background color="-1146675"/>
               <font name="Forte" style="2"/>
-              <foreground color="-1537"/>
+              <foreground color="-13947600"/>
               <text value="Remove order from transport"/>
             </properties>
           </component>
@@ -283,7 +283,7 @@
             <properties>
               <background color="-1146675"/>
               <font name="Forte" style="2"/>
-              <foreground color="-1537"/>
+              <foreground color="-13947600"/>
               <text value="Add order to transport"/>
             </properties>
           </component>
