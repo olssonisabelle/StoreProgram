@@ -3,6 +3,8 @@ package Handelsakademin.StoreProgram;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.ColorUIResource;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -192,6 +194,8 @@ public class OrderForm {
         totalPriceLabel.setText(calcTotalPrice() + " kr");
         //Disables button for removing products
         removeItemButton.setEnabled(false);
+        //Make disable button text color black
+        UIManager.put("Button.disabledText", new ColorUIResource(Color.BLACK));
     }
 
     private int calcTotalPrice(){
