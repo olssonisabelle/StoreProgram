@@ -7,6 +7,9 @@ public class Transport {
     private String driver;
     private String registrationNumber;
     private ArrayList<Order> transportOrders;
+    public boolean isTransported() {
+        return isTransported;
+    }
     private boolean isTransported;
     public static int nextId = 1;
 
@@ -59,39 +62,11 @@ public class Transport {
     public String getDriver() {
         return driver;
     }
-
-    public void setDriver(String driver) {
-        this.driver = driver;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
-    public ArrayList<Order> getTransportOrders() {
-        return transportOrders;
-    }
     public String getTransportOrdersText() {
         String text = "";
         for(Order order: transportOrders){
             text += ", Order ID: " + order.getId() + ", Customer: " + order.getCustomerName();
         }
         return text;
-    }
-
-    public void setTransportOrders(ArrayList<Order> transportOrders) {
-        this.transportOrders = transportOrders;
-    }
-
-    public boolean isTransported() {
-        return isTransported;
-    }
-
-    public void setTransported(boolean transported) {
-        isTransported = transported;
     }
 }

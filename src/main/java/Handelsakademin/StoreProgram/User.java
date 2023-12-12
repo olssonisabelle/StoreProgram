@@ -57,10 +57,6 @@ public class User {
         return working;
     }
 
-    public void setWorking(boolean working) {
-        this.working = working;
-    }
-
     public String getPassword() {
         return password;
     }
