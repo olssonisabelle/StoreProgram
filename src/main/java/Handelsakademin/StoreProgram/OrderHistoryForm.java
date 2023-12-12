@@ -66,7 +66,11 @@ public class OrderHistoryForm {
                     // Placeholder for selected order
                     Order selectedOrder  = orderList.get(index);
                     // Order can only be cancelled before it's been shipped or delivered
-                    if(!selectedOrder.getStatus().equals("SHIPPED") && !selectedOrder.getStatus().equals("DELIVERED")) {
+                    if(selectedOrder.getStatus().equals("CANCELLED")){
+                        // Update user
+                        messageLabel.setText("Order is already cancelled");
+                    }
+                    else if(!selectedOrder.getStatus().equals("SHIPPED") && !selectedOrder.getStatus().equals("DELIVERED")) {
                         // Changes the status of the order to cancelled
                         selectedOrder.setStatus("CANCELLED");
                         // Update user
