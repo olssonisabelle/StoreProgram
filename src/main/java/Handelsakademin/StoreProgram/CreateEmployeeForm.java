@@ -25,7 +25,7 @@ public class CreateEmployeeForm {
     public CreateEmployeeForm() {
         jFrame = new JFrame();
         jFrame.pack();
-        jFrame.setSize(500, 500);
+        jFrame.setSize(600, 600);
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
@@ -46,9 +46,12 @@ public class CreateEmployeeForm {
                     messageLabel.setText("Please write a number for salary");
                 }
                 String password = passwordField.getText();
-                if(salary > 0) {
                     //Check if all fields are filled in to create a new employee
-                    if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !salaryField.getText().isEmpty()) {
+                    if(salary <= 0){
+                        messageLabel.setText("Please write a positive number for salary");
+                    }
+                    else {
                         Employee newEmployee = new Employee(firstName, lastName, email, salary, password);
                         //Add employee to userList
                         employeeForm.getLoginForm().getUserHandler().addNewEmployee(newEmployee);
@@ -65,12 +68,9 @@ public class CreateEmployeeForm {
                         salaryField.setText("");
                         passwordField.setText("");
                     }
-                    else {
-                        messageLabel.setText("Not enough information provided for creating a new employee");
-                    }
                 }
                 else {
-                    messageLabel.setText("Please write a positive number for salary");
+                    messageLabel.setText("Not enough information");
                 }
             }
         });

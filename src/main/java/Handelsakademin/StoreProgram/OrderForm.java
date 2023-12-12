@@ -126,6 +126,8 @@ public class OrderForm {
                             productList.get(productListIndex).setQuantity(availableQuantity);
                             //Update quantity to what is remaining
                             productList.get(productListIndex).setQuantity(availableQuantity-newQuantity);
+                            //Update total price
+                            totalPriceLabel.setText(Integer.toString(calcTotalPrice()));
                             //Update user
                             messageLabel.setText("Quantity is now updated");
                         }

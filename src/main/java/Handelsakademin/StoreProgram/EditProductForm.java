@@ -73,6 +73,10 @@ public class EditProductForm {
                             messageLabel.setText("Product information has been changed");
                             // Updates JList
                             refreshJList();
+                            //Reset fields
+                            nameField.setText("");
+                            priceField.setText("");
+                            quantityField.setText("");
                         } else {
                             messageLabel.setText("Missing information to save changes");
                         }

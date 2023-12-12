@@ -117,6 +117,8 @@ public class TransportForm {
                         if (packedOrders.get(index).getId() == orders.get(i).getId()) {
                             //Add order to transport list
                             transportArrayList.add(orders.get(i));
+                            //Remove order from packedOrdersList
+                            packedOrders.remove(packedOrders.get(index));
                             //Change status in order to ship
                             orders.get(i).setStatus("SHIPPED");
                             //Update file

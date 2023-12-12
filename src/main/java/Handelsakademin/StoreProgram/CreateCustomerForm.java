@@ -45,8 +45,11 @@ public class CreateCustomerForm {
                 }
                 String city = cityField.getText();
                 String password = passwordField.getText();
-                if(zipCode > 0) {
-                    if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !street.isEmpty() && !city.isEmpty() && !password.isEmpty()) {
+                if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !street.isEmpty() && !city.isEmpty() && !password.isEmpty() && !zipCodeField.getText().isEmpty()) {
+                    if(zipCode <= 0 ){
+                        messageLabel.setText("Please write a number for zip code.");
+                    }
+                    else {
                         Customer newCustomer = new Customer(firstName, lastName, email, street, zipCode, city, password);
                         //Add customer to userList
                         loginForm.getUserHandler().addNewCustomer(newCustomer);
@@ -62,12 +65,10 @@ public class CreateCustomerForm {
                         zipCodeField.setText("");
                         cityField.setText("");
                         passwordField.setText("");
-                    } else {
-                        messageLabel.setText("Not enough information provided for creating a new customer.");
                     }
                 }
-                else{
-                    messageLabel.setText("Please write a number for zip code.");
+                else {
+                    messageLabel.setText("Not enough information provided for creating a new customer.");
                 }
             }
         });
