@@ -173,6 +173,7 @@
             </constraints>
             <properties>
               <background color="-1146675"/>
+              <font name="Forte" style="0"/>
               <text value="Go back"/>
             </properties>
           </component>
@@ -271,6 +272,7 @@
             </constraints>
             <properties>
               <background color="-1146675"/>
+              <font name="Forte" style="0"/>
               <text value="Create"/>
             </properties>
           </component>
@@ -298,7 +300,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-1537"/>
+                  <background color="-1"/>
                   <selectionBackground color="-1146675"/>
                 </properties>
               </component>
