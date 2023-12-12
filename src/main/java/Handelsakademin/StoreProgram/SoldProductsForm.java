@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Represents a form displaying sold products, including information about employees and transportation.
+ */
 public class SoldProductsForm {
     private JFrame jFrame;
     private EmployeeForm employeeForm;
@@ -23,7 +26,11 @@ public class SoldProductsForm {
     private OrderHandler orderHandler = new OrderHandler();
     private ArrayList<Order> orders;
 
+    /**
+     * Constructor to initialize the SoldProductsForm.
+     */
     public SoldProductsForm() {
+        // Initialize JFrame and set properties
         jFrame = new JFrame();
         jFrame.pack();
         jFrame.setSize(500, 500);
@@ -31,52 +38,73 @@ public class SoldProductsForm {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setContentPane(soldProductsPanel);
+
+        // Set models for JLists
         soldProductsList.setModel(listModel);
         transportJList.setModel(transportListModel);
+
+        // Set ActionListener for goBackButton
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Set visibility of employeeForm to true and dispose of the current frame
                 employeeForm.setVisibility(true);
                 jFrame.dispose();
             }
         });
     }
 
+    /**
+     * Sets the employee name label on the form.
+     */
     public void setEmployeeNameLabel() {
-       soldProductsNameLabel.setText(employeeForm.getLoginForm().getLogedInUser().getFirstName() + " " + employeeForm.getLoginForm().getLogedInUser().getLastName());
+        soldProductsNameLabel.setText(employeeForm.getLoginForm().getLogedInUser().getFirstName() + " " + employeeForm.getLoginForm().getLogedInUser().getLastName());
     }
+
+    /**
+     * Sets the employee form and initializes related data on the form.
+     *
+     * @param employeeForm The associated EmployeeForm.
+     */
     public void setEmployeeForm(EmployeeForm employeeForm) {
         this.employeeForm = employeeForm;
         setEmployeeNameLabel();
         setSoldProducts();
-        //Create transportHandler to use in refreshTransportJList
+        // Create transportHandler to use in refreshTransportJList
         transportHandler = new TransportHandler();
-        //Refresh transportJList
+        // Refresh transportJList
         refreshTransportJList();
     }
-    private void refreshTransportJList(){
-        //First, remove all elements from the list.
+
+    /**
+     * Refreshes the transport JList by reading the transport list and updating the UI.
+     */
+    private void refreshTransportJList() {
+        // First, remove all elements from the list.
         transportListModel.removeAllElements();
-        //Get transportList from transportHandler class
+        // Get transportList from transportHandler class
         transportHandler.readTransportList();
         transportList = transportHandler.getTransportList();
-        //Add all transport to transportJList
+        // Add all transport to transportJList
         for (Transport transport : transportList) {
             transportListModel.addElement("Transport ID: " + transport.getID() + ", Driver: " + transport.getDriver() + " " + transport.getTransportOrdersText());
         }
     }
 
+    /**
+     * Sets the sold products on the form by reading order data and updating the UI.
+     */
     private void setSoldProducts() {
         orderHandler.readOrderList();
         orders = orderHandler.getOrderList();
         HashMap<String, Integer> productNameToQuantity = new HashMap<>();
-        for(Order order : orders) {
+        for (Order order : orders) {
             ArrayList<Product> productList = order.getProductList();
-            for(Product product : productList) {
+            for (Product product : productList) {
                 String name = product.getName();
                 int quantity = product.getQuantity();
                 boolean alreadyAdded = productNameToQuantity.containsKey(name);
-                if(alreadyAdded){
+                if (alreadyAdded) {
                     Integer oldQuantity = productNameToQuantity.get(name);
                     int newQuantity = oldQuantity + quantity;
                     productNameToQuantity.put(name, newQuantity);
@@ -86,10 +114,10 @@ public class SoldProductsForm {
             }
         }
         Set<Map.Entry<String, Integer>> entries = productNameToQuantity.entrySet();
-        for(Map.Entry entry : entries) {
+        for (Map.Entry entry : entries) {
             String name = (String) entry.getKey();
             Integer quantity = (Integer) entry.getValue();
-            listModel.addElement(name + ", " +quantity);
+            listModel.addElement(name + ", " + quantity);
         }
     }
 }
