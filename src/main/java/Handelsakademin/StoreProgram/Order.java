@@ -12,7 +12,6 @@ public class Order {
         RECEIVED,
         PACKED,
         CANCELLED,
-        FAILED,
         SHIPPED,
         DELIVERED
 
@@ -104,9 +103,6 @@ public class Order {
                 break;
             case "CANCELLED":
                 this.status = Status.CANCELLED;
-                break;
-            case "FAILED":
-                this.status = Status.FAILED;
                 break;
             case "SHIPPED":
                 this.status = Status.SHIPPED;

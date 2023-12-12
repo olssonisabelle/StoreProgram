@@ -17,6 +17,8 @@ public class OrderHistoryForm {
     private JList productJList;
     private JLabel totalPriceLabel;
     private JLabel statusLabel;
+    private JButton cancelButton;
+    private JLabel messageLabel;
     private ShoppingForm shoppingForm;
     ArrayList <Order> orderList;
     private DefaultListModel orderDefaultListModel = new DefaultListModel<>();
@@ -48,11 +50,36 @@ public class OrderHistoryForm {
         orderJList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                messageLabel.setText("");
                 int index = orderJList.getSelectedIndex();
                 //Sets the orderIdLabel to the selected order's id
                 orderIdLabel.setText(orderList.get(index).getId() + "");
                 //Updates the productJList to the selected order's information
                 refreshProductJList(index);
+            }
+        });
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(orderJList.getSelectedIndex() > -1 ){
+                    int index = orderJList.getSelectedIndex();
+                    // Placeholder for selected order
+                    Order selectedOrder  = orderList.get(index);
+                    // Order can only be cancelled before it's been shipped or delivered
+                    if(!selectedOrder.getStatus().equals("SHIPPED") && !selectedOrder.getStatus().equals("DELIVERED")) {
+                        // Changes the status of the order to cancelled
+                        selectedOrder.setStatus("CANCELLED");
+                        // Update user
+                        messageLabel.setText("Order was cancelled");
+                        // Update statusLabel
+                        statusLabel.setText(selectedOrder.getStatus());
+                        // Save the changes to the orderFile
+                        orderHandler.saveOrderList();
+                    }
+                    else {
+                        messageLabel.setText("Order can not be cancelled");
+                    }
+                }
             }
         });
     }

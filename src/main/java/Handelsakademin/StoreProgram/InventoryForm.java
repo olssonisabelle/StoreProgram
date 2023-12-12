@@ -14,7 +14,7 @@ public class InventoryForm {
     private JLabel orderLabel;
     private JList chosenOrderList;
     private JButton goBackButton;
-    private JLabel cusotmerNameLabel;
+    private JLabel customerNameLabel;
     private JComboBox statusComboBox;
     private JButton changeStatusButton;
     private JLabel messageLabel;
@@ -63,7 +63,7 @@ public class InventoryForm {
                 orderIndex = orderList.getSelectedIndex();
                 // Change the labels to display order id and which customer
                 orderLabel.setText("Order: " + orders.get(orderIndex).getId());
-                cusotmerNameLabel.setText(orders.get(orderIndex).getCustomerName());
+                customerNameLabel.setText(orders.get(orderIndex).getCustomerName());
                 refreshChosenOrderList(orderIndex);
             }
         });
