@@ -13,7 +13,7 @@ public class ShoppingForm {
     private JTextField quantityField;
     private JButton addToCartButton;
     private JButton logOutButton;
-    private JLabel userNameLable;
+    private JLabel userNameLabel;
     private JButton editCustomerButton;
     private JButton checkOutButton;
     private JLabel priceLabel;
@@ -131,7 +131,12 @@ public class ShoppingForm {
                 orderForm.setShoppingForm(shoppingForm);
                 orderForm.setUserNameLabel();
                 setVisibility(false);
+                productJList.setSelectedIndex(-1);
                 messageLabel.setText("");
+                productNameLabel.setText("");
+                priceLabel.setText("");
+                quantityField.setText("");
+                availableQuantityLabel.setText("");
             }
         });
 
@@ -182,7 +187,7 @@ public class ShoppingForm {
 
     //Fill in userNameLabel with the logged-in users full name
     public void setUserNameLable(){
-        userNameLable.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
+        userNameLabel.setText(loginForm.getLogedInUser().getFirstName() + " " + loginForm.getLogedInUser().getLastName());
     }
     public ArrayList<Product> getCheckProductsQuantityList(){
         return checkProductsQuantityList;

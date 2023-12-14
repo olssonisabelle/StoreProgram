@@ -1,8 +1,8 @@
-1,T-shirt,900000,1000000
-2,Pants,200,0
+1,T-shirt,900000,100
+2,Pants,200,120
 3,Fleece jacket,700,10
 4,Skirt,250,14
 6,Box,10,124
-7,Pen,15,779
+7,Pen,15,764
 13,Shoe,400,20
-14,Pillow,450,20
+14,Pillow,450,19

@@ -167,6 +167,10 @@ public class OrderForm {
                     messageLabel.setText("Item is removed");
                     //Update JList of products in order
                     refreshJList();
+                    //Removes the information about the removed item
+                    priceLabel.setText("");
+                    quantityField.setText("");
+                    productNameLabel.setText("");
                 }
                 else{
                     messageLabel.setText("No item in cart is selected");
